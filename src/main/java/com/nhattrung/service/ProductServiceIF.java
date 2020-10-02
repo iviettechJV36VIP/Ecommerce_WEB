@@ -13,4 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ProductServiceIF {
     public List<Product> getListProductByNoteIsHot(String note);
+    public List<Product> getListProductByNoteIsNew(String note);
+ //   public List<Product> getProducts();
 }

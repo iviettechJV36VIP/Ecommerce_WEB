@@ -22,9 +22,18 @@ public class ProductService implements ProductServiceIF{
     ProductRepository productRepository;
 
 
-    @Override
+   @Override
     public List<Product> getListProductByNoteIsHot(String note) {
-        return (List) productRepository.findByNote(note);
+       return (List) productRepository.findByNote(note);
     }
+   @Override
+    public List<Product> getListProductByNoteIsNew(String note) {
+       return (List) productRepository.findByNote(note);
+    }
+
+ //   @Override
+ //   public List<Product> getProducts() {
+ //       return (List)productRepository.findAll();
+//    }
     
 }
