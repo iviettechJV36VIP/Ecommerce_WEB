@@ -121,7 +121,27 @@
 										<li><a href="product-details.html">Product Details</a></li> 
 										<li><a href="checkout.html">Checkout</a></li> 
 										<li><a href="cart.html">Cart</a></li> 
-										<li><a href="login.html">Login</a></li> 
+										<sec:authorize access="isAuthenticated()">
+                                                                                <sec:authorize access="permitAll">
+
+                                                                                    <form action="<c:url value='/j_spring_security_logout' />" method="post" id="logoutForm">
+                                                                                        <input type="hidden" name="${_csrf.parameterName}"
+                                                                                               value="${_csrf.token}" />
+                                                                                    </form>
+                                                                                    <script>
+                                                                                        function formSubmit() {
+                                                                                            document.getElementById("logoutForm").submit();
+                                                                                        }
+                                                                                    </script>
+
+                                                                                    <c:if test="${pageContext.request.userPrincipal.name != null}">
+                                                                                        <li>
+                                                                                            User : ${pageContext.request.userPrincipal.name} | <a
+                                                                                                href="javascript:formSubmit()"> Logout</a>
+                                                                                        </li>
+                                                                                    </c:if>
+                                                                                </sec:authorize>
+                                                                                </sec:authorize>
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
