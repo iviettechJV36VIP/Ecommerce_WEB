@@ -30,18 +30,25 @@ public class ProductController {
     @Autowired 
     private ProductService productService;
     
-    @GetMapping(value = "/home")
-    public String listProduct(HttpServletRequest request, Model theModel) {
-        List<Product> products = productService.getListProductByNoteIsHot("hot");
-        PagedListHolder pagedListHolder = new PagedListHolder(products);
-		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
-		pagedListHolder.setPage(page);
-		pagedListHolder.setPageSize(5);
-                
+    @GetMapping(value = {"/", "/home"})
+    public String listProductNoteIsHot(HttpServletRequest request, Model theModel) {
+        List<Product> products1 = productService.getListProductByNoteIsHot("hot");
+        PagedListHolder pagedListHolder = new PagedListHolder(products1);
+		int page1 = ServletRequestUtils.getIntParameter(request, "p", 0);
+		pagedListHolder.setPage(page1);
+		pagedListHolder.setPageSize(3);
 	theModel.addAttribute("pagedListHolder", pagedListHolder);
+        
+        List<Product> products2 = productService.getListProductByNoteIsNew("new");
+        PagedListHolder pagedListHolder1 = new PagedListHolder(products2);
+		int page2 = ServletRequestUtils.getIntParameter(request, "p", 0);
+		pagedListHolder1.setPage(page2);
+		pagedListHolder1.setPageSize(3);
+        theModel.addAttribute("pagedListHolder1", pagedListHolder1 );
                 
 	return "home";
     }
-    
-    
+
+
+
 }
