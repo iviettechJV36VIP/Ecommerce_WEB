@@ -62,6 +62,9 @@ public class Customer implements Serializable{
     
     @Column(name = "password")
     private String password;
+    
+    @Column(name = "enabled")
+    private String enabled;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private List<OrderList> orderLists;
@@ -72,7 +75,7 @@ public class Customer implements Serializable{
     public Customer() {
     }
 
-    public Customer(int customerId, String customerFirstName, String customerLastName, Date birthdate, String sex, String email, int phone, String customerAddress, String customerDistrict, String customerCity, String username, String password, List<OrderList> orderLists, List<AccountRole> accountRoles) {
+    public Customer(int customerId, String customerFirstName, String customerLastName, Date birthdate, String sex, String email, int phone, String customerAddress, String customerDistrict, String customerCity, String username, String password, String enabled, List<OrderList> orderLists, List<AccountRole> accountRoles) {
         this.customerId = customerId;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
@@ -85,13 +88,10 @@ public class Customer implements Serializable{
         this.customerCity = customerCity;
         this.username = username;
         this.password = password;
+        this.enabled = enabled;
         this.orderLists = orderLists;
         this.accountRoles = accountRoles;
     }
-
-    
-
-    
 
     
 
@@ -199,6 +199,15 @@ public class Customer implements Serializable{
         this.orderLists = orderLists;
     }
 
+    public String getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(String enabled) {
+        this.enabled = enabled;
+    }
+    
+    
 
     public List<AccountRole> getAccountRoles() {
         return accountRoles;
