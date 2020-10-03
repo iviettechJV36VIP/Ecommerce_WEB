@@ -36,14 +36,14 @@ public class ProductController {
         PagedListHolder pagedListHolder = new PagedListHolder(products1);
 		int page1 = ServletRequestUtils.getIntParameter(request, "p", 0);
 		pagedListHolder.setPage(page1);
-		pagedListHolder.setPageSize(6);
+		pagedListHolder.setPageSize(3);
 	theModel.addAttribute("pagedListHolder", pagedListHolder);
         
         List<Product> products2 = productService.getListProductByNoteIsNew("new");
         PagedListHolder pagedListHolder1 = new PagedListHolder(products2);
 		int page2 = ServletRequestUtils.getIntParameter(request, "p", 0);
-		pagedListHolder.setPage(page2);
-		pagedListHolder.setPageSize(6);
+		pagedListHolder1.setPage(page2);
+		pagedListHolder1.setPageSize(3);
         theModel.addAttribute("pagedListHolder1", pagedListHolder1 );
                 
 	return "home";

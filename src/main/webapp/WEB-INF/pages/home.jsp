@@ -184,9 +184,10 @@
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="images/home/girl1.jpg" class="girl img-responsive" alt="" />
-									
-                                                                        <img src="../resources/images/home/pricing.png" alt=""/>
+									<img src="${pageContext.request.getContextPath()}/resources/images/home/girl1.jpg" class="girl img-responsive" alt="" />
+									<!--
+                                                                        <img src="${pageContext.request.getContextPath()}/resources/images/home/pricing.png" alt=""/>
+                                                                        -->
 								</div>
 							</div>
 							<div class="item">
@@ -197,7 +198,7 @@
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="images/home/girl2.jpg" class="girl img-responsive" alt="" />
+									<img src="${pageContext.request.getContextPath()}/resources/images/home/girl2.jpg" class="girl img-responsive" alt="" />
 									<img src="images/home/pricing.png"  class="pricing" alt="" />
 								</div>
 							</div>
@@ -210,7 +211,7 @@
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
+									<img src="${pageContext.request.getContextPath()}/resources/images/home/girl3.jpg" class="girl img-responsive" alt="" />
 									<img src="images/home/pricing.png" class="pricing" alt="" />
 								</div>
 							</div>
@@ -325,7 +326,7 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 										<div class="productinfo text-center">
-											<img src="/resources/images/home/product1.jpg" alt="" />
+											<img src="${pageContext.request.getContextPath()}/resources/images/home/product1.jpg" alt="" />
 											<h2>${tempProductHot.price}</h2>
 											<p>${tempProductHot.productName}</p>
 											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -351,7 +352,7 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 										<div class="productinfo text-center">
-											<img src="/resources/images/home/product1.jpg" alt="" />
+											<img src="${pageContext.request.getContextPath()}/resources/images/home/product1.jpg" alt="" />
 											<h2>${tempProductNew.price}</h2>
 											<p>${tempProductNew.productName}</p>
 											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -489,7 +490,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="images/home/iframe1.png" alt="" />
+										<img src="${pageContext.request.getContextPath()}/resources/images/home/iframe1.png" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
@@ -504,7 +505,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="images/home/iframe2.png" alt="" />
+										<img src="${pageContext.request.getContextPath()}/resources/images/home/iframe2.png" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
@@ -519,7 +520,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="images/home/iframe3.png" alt="" />
+										<img src="${pageContext.request.getContextPath()}/resources/images/home/iframe3.png" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
@@ -534,7 +535,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="images/home/iframe4.png" alt="" />
+										<img src="${pageContext.request.getContextPath()}/resources/images/home/iframe4.png" alt="" />
 									</div>
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
@@ -547,7 +548,7 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="address">
-							<img src="images/home/map.png" alt="" />
+							<img src="${pageContext.request.getContextPath()}/resources/images/home/map.png" alt="" />
 							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
 						</div>
 					</div>
