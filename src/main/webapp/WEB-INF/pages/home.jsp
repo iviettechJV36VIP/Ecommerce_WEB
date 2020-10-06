@@ -7,10 +7,7 @@
 
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        
         <title>Home | E-Shopper</title>
 
         <!--
@@ -28,7 +25,7 @@
                       rel="stylesheet">
             <link href='${pageContext.request.getContextPath()}/resources/css/responsive.css'
                       rel="stylesheet">
-            
+        
         
         
         
@@ -89,10 +86,34 @@
 					<div class="col-md-8 clearfix">
 						<div class="shop-menu clearfix pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-user"></i> Account</a></li>
+								
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                                                                
+
+                                                                                    <form action="<c:url value='/j_spring_security_logout' />" method="post" id="logoutForm">
+                                                                                        <input type="hidden" name="${_csrf.parameterName}"
+                                                                                               value="${_csrf.token}" />
+                                                                                    </form>
+                                                                                    <script>
+                                                                                        function formSubmit() {
+                                                                                            document.getElementById("logoutForm").submit();
+                                                                                        }
+                                                                                    </script>
+
+                                                                                    <c:if test="${pageContext.request.userPrincipal.name != null}">
+                                                                                        <li>
+                                                                                            Wellcome, ${pageContext.request.userPrincipal.name} | <a
+                                                                                                href="javascript:formSubmit()"> Logout</a>
+                                                                                        </li>
+                                                                                        <li><a href=""><i class="fa fa-user"></i> Account</a></li>
+                                                                                    </c:if>
+                                                                                    <c:if test="${pageContext.request.userPrincipal.name == null}" >
+                                                                                        <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>
+                                                                                    </c:if>
+                                                                                
+                                                                
+                                                                                    
 							</ul>
 						</div>
 					</div>
@@ -121,27 +142,9 @@
 										<li><a href="product-details.html">Product Details</a></li> 
 										<li><a href="checkout.html">Checkout</a></li> 
 										<li><a href="cart.html">Cart</a></li> 
-										<sec:authorize access="isAuthenticated()">
-                                                                                <sec:authorize access="permitAll">
-
-                                                                                    <form action="<c:url value='/j_spring_security_logout' />" method="post" id="logoutForm">
-                                                                                        <input type="hidden" name="${_csrf.parameterName}"
-                                                                                               value="${_csrf.token}" />
-                                                                                    </form>
-                                                                                    <script>
-                                                                                        function formSubmit() {
-                                                                                            document.getElementById("logoutForm").submit();
-                                                                                        }
-                                                                                    </script>
-
-                                                                                    <c:if test="${pageContext.request.userPrincipal.name != null}">
-                                                                                        <li>
-                                                                                            User : ${pageContext.request.userPrincipal.name} | <a
-                                                                                                href="javascript:formSubmit()"> Logout</a>
-                                                                                        </li>
-                                                                                    </c:if>
-                                                                                </sec:authorize>
-                                                                                </sec:authorize>
+										
+                                                                                    
+                                                                                
                                     </ul>
                                 </li> 
 								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>

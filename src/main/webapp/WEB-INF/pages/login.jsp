@@ -1,6 +1,9 @@
 
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -92,17 +95,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8 clearfix">
-                            <div class="shop-menu clearfix pull-right">
-                                <ul class="nav navbar-nav">
-                                    <li><a href=""><i class="fa fa-user"></i> Account</a></li>
-                                    <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-                                    <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div><!--/header-middle-->
@@ -166,32 +159,21 @@
                                 <div class="msg">${msg}</div>
                             </c:if>
 
-                            <form name="loginForm" action="<c:url value='/j_spring_security_check' />" method='POST'>
-                                <input type="text" name="username" placeholder="Username" />
-                                <input type="password" name="password" placeholder="Password" />
                                 
+                                    <form name="loginForm" action="<c:url value="/j_spring_security_check"/>" method="POST">
+                                        <input type="text"  name="username" placeholder="Username" />
+                                    <input type="password"  name="password" placeholder="Password" />
+                                 <a href="${pageContext.request.contextPath}/register">Tạo tài khoản mới</a>
                                 <button type="submit" class="btn btn-default">Login</button>
-
+                                
+                                
                                 <input type="hidden" name="${_csrf.parameterName}"
                                        value="${_csrf.token}" />
+                                
                             </form>
 
                         </div><!--/login form-->
-                    </div>
-                    <div class="col-sm-1">
-                        <h2 class="or">OR</h2>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="signup-form"><!--sign up form-->
-                            <h2>New User Signup!</h2>
-                            <form action="#">
-                                <input type="text" placeholder="Name"/>
-                                <input type="email" placeholder="Email Address"/>
-                                <input type="password" placeholder="Password"/>
-                                <button type="submit" class="btn btn-default">Signup</button>
-                            </form>
-                        </div><!--/sign up form-->
-                    </div>
+                    </div>  
                 </div>
             </div>
         </section><!--/form-->
@@ -347,7 +329,7 @@
             <div class="footer-bottom">
                 <div class="container">
                     <div class="row">
-                        <p class="pull-left">Copyright � 2013 E-SHOPPER Inc. All rights reserved.</p>
+                        <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
                         <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
                     </div>
                 </div>
@@ -357,11 +339,6 @@
 
 
 
-        <script src="js/jquery.js"></script>
-        <script src="js/price-range.js"></script>
-        <script src="js/jquery.scrollUp.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.prettyPhoto.js"></script>
-        <script src="js/main.js"></script>
+        
     </body>
 </html>

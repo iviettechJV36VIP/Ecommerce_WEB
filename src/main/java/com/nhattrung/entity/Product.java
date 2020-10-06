@@ -6,8 +6,10 @@
 package com.nhattrung.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 @Entity
 @Table(name ="product")
@@ -35,6 +38,10 @@ public class Product implements Serializable{
     @Column(name = "note")
     private String note;
     
+    @Column(name = "dateAdded")
+    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
+    private LocalDate dateAdded;
+    
     @ManyToOne
     @JoinColumn(name = "Category_categoryId")
     private Category category;
@@ -52,17 +59,20 @@ public class Product implements Serializable{
     public Product() {
     }
 
-    public Product(int productId, String productName, int price, String comment, String note, Category category, Producer producer, List<Image> images, List<OrderDetails> orderDetailses) {
+    public Product(int productId, String productName, int price, String comment, String note, LocalDate dateAdded, Category category, Producer producer, List<Image> images, List<OrderDetails> orderDetailses) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
         this.comment = comment;
         this.note = note;
+        this.dateAdded = dateAdded;
         this.category = category;
         this.producer = producer;
         this.images = images;
         this.orderDetailses = orderDetailses;
     }
+
+    
 
     
 
@@ -136,6 +146,14 @@ public class Product implements Serializable{
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public LocalDate getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(LocalDate dateAdded) {
+        this.dateAdded = dateAdded;
     }
     
     

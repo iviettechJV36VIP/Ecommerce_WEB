@@ -6,9 +6,11 @@
 package com.nhattrung.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -36,9 +39,8 @@ public class Customer implements Serializable{
     private String customerLastName;
     
     @Column(name = "birthdate")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date birthdate;
+    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
+    private LocalDate birthdate;
     
     @Column(name = "sex")
     private String sex;
@@ -75,7 +77,7 @@ public class Customer implements Serializable{
     public Customer() {
     }
 
-    public Customer(int customerId, String customerFirstName, String customerLastName, Date birthdate, String sex, String email, int phone, String customerAddress, String customerDistrict, String customerCity, String username, String password, String enabled, List<OrderList> orderLists, List<AccountRole> accountRoles) {
+    public Customer(int customerId, String customerFirstName, String customerLastName, LocalDate birthdate, String sex, String email, int phone, String customerAddress, String customerDistrict, String customerCity, String username, String password, String enabled, List<OrderList> orderLists, List<AccountRole> accountRoles) {
         this.customerId = customerId;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
@@ -92,6 +94,8 @@ public class Customer implements Serializable{
         this.orderLists = orderLists;
         this.accountRoles = accountRoles;
     }
+
+    
 
     
 
@@ -119,13 +123,15 @@ public class Customer implements Serializable{
         this.customerLastName = customerLastName;
     }
 
-    public Date getBirthdate() {
+    public LocalDate getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
+
+    
 
     public String getSex() {
         return sex;

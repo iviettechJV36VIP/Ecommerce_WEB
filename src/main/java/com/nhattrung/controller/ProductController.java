@@ -23,14 +23,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
+
 @RequestMapping("/")
+    
 
 public class ProductController {
     
     @Autowired 
     private ProductService productService;
     
-    @GetMapping(value = {"/", "/home"})
+    
+    
+    
+    @GetMapping(value = "/home")
     public String listProductNoteIsHot(HttpServletRequest request, Model theModel) {
         List<Product> products1 = productService.getListProductByNoteIsHot("hot");
         PagedListHolder pagedListHolder = new PagedListHolder(products1);

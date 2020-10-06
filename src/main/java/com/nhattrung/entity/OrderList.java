@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -32,9 +34,9 @@ public class OrderList implements Serializable{
     private int orderId;
     
     @Column(name = "orderDate")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date orderDate;
+    
+    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
+    private LocalDate orderDate;
     
     @Column(name = "promotionCode")
     private String promotionCode;
@@ -42,9 +44,8 @@ public class OrderList implements Serializable{
     private int amount;
     
     @Column(name = "expires")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date expires;
+    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
+    private LocalDate expires;
     
     @OneToMany(mappedBy = "orderLists",fetch = FetchType.EAGER)
     private List<OrderDetails> orderDetailses;
@@ -56,7 +57,7 @@ public class OrderList implements Serializable{
     public OrderList() {
     }
 
-    public OrderList(int orderId, Date orderDate, String promotionCode, int amount, Date expires, List<OrderDetails> orderDetailses, Customer customer) {
+    public OrderList(int orderId, LocalDate orderDate, String promotionCode, int amount, LocalDate expires, List<OrderDetails> orderDetailses, Customer customer) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.promotionCode = promotionCode;
@@ -65,6 +66,8 @@ public class OrderList implements Serializable{
         this.orderDetailses = orderDetailses;
         this.customer = customer;
     }
+
+    
 
     
 
@@ -85,21 +88,23 @@ public class OrderList implements Serializable{
         this.promotionCode = promotionCode;
     }
 
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
-    public Date getExpires() {
+    public LocalDate getExpires() {
         return expires;
     }
 
-    public void setExpires(Date expires) {
+    public void setExpires(LocalDate expires) {
         this.expires = expires;
     }
+
+    
     
     
     
