@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ProductServiceIF {
     public List<Product> getListProductByNoteIsHot(String note);
-    public List<Product> getListProductByNoteIsNew(String note);
+    public List<Product> getListProductByNoteIsNew(int num);
  //   public List<Product> getProducts();
+    public Product getProductDetails(int productId);
+    public List<Product> getListProductByCategoryId(int category);
+    public List<Product> getListProductByProducer(int producer);
+    public List<Product> getAllProduct();
 }

@@ -8,6 +8,7 @@ package com.nhattrung.service;
 import java.util.List;
 import com.nhattrung.entity.Product;
 import com.nhattrung.repository.ProductRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +28,28 @@ public class ProductService implements ProductServiceIF{
        return (List) productRepository.findByNote(note);
     }
    @Override
-    public List<Product> getListProductByNoteIsNew(String note) {
-       return (List) productRepository.findByNote(note);
+    public List<Product> getListProductByNoteIsNew(int num) {
+       return (List) productRepository.getByNoteNew(num);
     }
 
- //   @Override
- //   public List<Product> getProducts() {
- //       return (List)productRepository.findAll();
-//    }
-    
+    @Override
+    public Product getProductDetails(int productId) {
+        return  productRepository.findById(productId);
+    }
+
+    @Override
+    public List<Product> getListProductByCategoryId(int category) {
+        return  (List) productRepository.findListProductByCategoryId(category);
+    }
+
+    @Override
+    public List<Product> getAllProduct() {
+        return (List) productRepository.findAll();
+    }
+
+    @Override
+    public List<Product> getListProductByProducer(int producer) {
+        return  (List) productRepository.findListProductByProducer(producer);
+    }
+
 }
