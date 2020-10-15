@@ -124,13 +124,13 @@
                                         <div class="single-products">
                                             <div class="productinfo text-center">
                                                 <img src="${pageContext.request.getContextPath()}/resources/images/laptop/1-org.jpg" alt="" />
-                                                <h2>${tempProductNew.price}</h2>
+                                                <h2>${tempProductNew.formattedPrice}</h2>
                                                 <p>${tempProductNew.productName}</p>
 
                                             </div>
                                             <div class="product-overlay">
                                                 <div class="overlay-content">
-                                                    <h2>${tempProductNew.price}</h2>
+                                                    <h2>${tempProductNew.formattedPrice}</h2>
                                                     <p>${tempProductNew.productName}</p>
                                                     <a href="<c:url value="/productDetails/${tempProductNew.productId}" />" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Product Detail</a>
                                                     <a href="<c:url value="/buy/${tempProductNew.productId}" />" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>

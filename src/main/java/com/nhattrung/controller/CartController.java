@@ -11,9 +11,11 @@ import com.nhattrung.entity.Product;
 import com.nhattrung.service.CategoryService;
 import com.nhattrung.service.ProducerService;
 import com.nhattrung.service.ProductService;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +55,10 @@ public class CartController {
                     total += item.getProduct().getPrice() * item.getQuantity();
                 }
             }
+            Locale localeVN = new Locale("vi", "VN");
+            NumberFormat c = NumberFormat.getCurrencyInstance(localeVN);
             modelMap.put("countItems", countItems);
-            modelMap.put("total", total);
+            modelMap.put("total", c.format(total));
             return "cart";
 	}
 

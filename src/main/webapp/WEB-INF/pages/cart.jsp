@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
@@ -43,13 +44,13 @@
 								<p>Product ID: ${item.product.productId}</p>
 							</td>
 							<td class="cart_price">
-								<p>${item.product.price}</p>
+								<p>${item.product.formattedPrice}</p>
 							</td>
 							<td class="cart_quantity">
                                                             <input style="width: 60px" type="number" name="quantities" value="${item.quantity}">
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">${item.product.price * item.quantity}</p>
+								<p class="cart_total_price"> <fmt:formatNumber value = "${item.product.price * item.quantity}" type = "currency"/></p>
 							</td>
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href="<c:url value="/remove/${item.product.productId}" />"><i class="fa fa-times"></i></a>

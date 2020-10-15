@@ -6,6 +6,7 @@
 package com.nhattrung.entity;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
@@ -21,7 +22,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import org.springframework.format.annotation.NumberFormat;
 
 @Entity
 @Table(name ="product")
@@ -34,7 +34,6 @@ public class Product implements Serializable{
     private String productName;
     
     @Column(name = "price")
-    @NumberFormat(pattern = "#.###.###.###")
     private int price;
     
     @Column(name = "comment")
@@ -159,5 +158,9 @@ public class Product implements Serializable{
     public void setDateAdded(LocalDate dateAdded) {
         this.dateAdded = dateAdded;
     }
-    
+    public String getFormattedPrice(){
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat c = NumberFormat.getCurrencyInstance(localeVN);
+        return c.format(price);
+    }
 }
