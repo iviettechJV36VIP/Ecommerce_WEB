@@ -117,25 +117,23 @@
 
                     <div class="col-sm-9 padding-right">
                         <div class="features_items"><!--features_items-->
-                            <h2 class="title text-center">Hot Products</h2>
-
-
-
-                            <c:forEach var="tempProductHot" items="${pagedListHolder.pageList}">
+                            <h2 class="title text-center">New Products</h2>
+                            <c:forEach var="tempProductNew" items="${pagedListHolder.pageList}">
                                 <div class="col-sm-4">
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
                                                 <img src="${pageContext.request.getContextPath()}/resources/images/laptop/1-org.jpg" alt="" />
-                                                <h2>${tempProductHot.price}</h2>
-                                                <p>${tempProductHot.productName}</p>
+                                                <h2>${tempProductNew.price}</h2>
+                                                <p>${tempProductNew.productName}</p>
+
                                             </div>
                                             <div class="product-overlay">
                                                 <div class="overlay-content">
-                                                    <h2>${tempProductHot.price}</h2>
-                                                    <p>${tempProductHot.productName}</p>
-                                                    <a href="<c:url value="/productDetails/${tempProductHot.productId}" />" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Product Detail</a>
-                                                    <a href="<c:url value="/buy/${tempProductHot.productId}" />" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    <h2>${tempProductNew.price}</h2>
+                                                    <p>${tempProductNew.productName}</p>
+                                                    <a href="<c:url value="/productDetails/${tempProductNew.productId}" />" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Product Detail</a>
+                                                    <a href="<c:url value="/buy/${tempProductNew.productId}" />" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                 </div>
                                             </div>
                                         </div>

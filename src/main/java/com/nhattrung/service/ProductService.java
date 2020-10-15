@@ -52,4 +52,9 @@ public class ProductService implements ProductServiceIF{
         return  (List) productRepository.findListProductByProducer(producer);
     }
 
+    @Override
+    public List<Product> searchProduct(String keyword) {
+        return productRepository.search(keyword);
+    }
+
 }

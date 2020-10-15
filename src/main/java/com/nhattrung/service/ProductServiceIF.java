@@ -19,4 +19,5 @@ public interface ProductServiceIF {
     public List<Product> getListProductByCategoryId(int category);
     public List<Product> getListProductByProducer(int producer);
     public List<Product> getAllProduct();
+    public List<Product> searchProduct(String keyword);
 }

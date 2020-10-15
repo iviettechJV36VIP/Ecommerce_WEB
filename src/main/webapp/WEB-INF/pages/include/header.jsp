@@ -124,13 +124,16 @@
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <div class="search_box pull-right">
-                                <input type="text" placeholder="Search"/>
+                            <div class="pull-right">
+                                <form method="get" action="<c:url value="/search?keyword=${keyword}"/>">
+                                    <input type="text" name="keyword">
+                                    <input type="submit" value="Search">
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div><!--/header-bottom-->
+            </div><!--/header-bottom  ?keyword=${keyword}-->
         </header>
     </body>
 </html>
