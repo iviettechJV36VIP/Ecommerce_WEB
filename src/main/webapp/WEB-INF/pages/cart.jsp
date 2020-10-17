@@ -71,9 +71,9 @@
 				<div class="col-sm-6">
 					<div class="total_area">
 						<ul>
-							<li>Total <span>$${total}</span></li>
+							<li>Total <span>${total}</span></li>
 						</ul>
-							<a class="btn btn-default check_out" href="">Check Out</a>
+							<a class="btn btn-default check_out" href="<c:url value="/cart/checkout" />">Check Out</a>
 					</div>
 				</div>
 			</div>

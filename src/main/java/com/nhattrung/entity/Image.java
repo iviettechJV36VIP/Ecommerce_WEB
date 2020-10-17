@@ -24,20 +24,18 @@ public class Image implements Serializable{
     private int imageNo;
     @Column(name = "imageName")
     private String imageName;
-    @Column(name = "photo")
-    private String photo;
     
     @ManyToOne
-    @JoinColumn(name = "Product_producerId")
+    @JoinColumn(name = "Product_productId")
     private Product product;
 
     public Image() {
     }
 
-    public Image(int imageNo, String imageName, String photo, Product product) {
+    
+    public Image(int imageNo, String imageName, Product product) {
         this.imageNo = imageNo;
         this.imageName = imageName;
-        this.photo = photo;
         this.product = product;
     }
 
@@ -57,14 +55,6 @@ public class Image implements Serializable{
         this.imageName = imageName;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
     public Product getProduct() {
         return product;
     }
@@ -72,6 +62,8 @@ public class Image implements Serializable{
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    
 
     
 

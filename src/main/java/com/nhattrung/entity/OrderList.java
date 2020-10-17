@@ -34,18 +34,20 @@ public class OrderList implements Serializable{
     private int orderId;
     
     @Column(name = "orderDate")
-    
     @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
     private LocalDate orderDate;
     
-    @Column(name = "promotionCode")
-    private String promotionCode;
     @Column(name = "amount")
     private int amount;
     
-    @Column(name = "expires")
-    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
-    private LocalDate expires;
+    @Column(name = "address")
+    private String address;
+    
+    @Column(name = "numberPhone")
+    private String numberPhone;
+    
+    @Column(name = "description")
+    private String description;
     
     @OneToMany(mappedBy = "orderLists",fetch = FetchType.EAGER)
     private List<OrderDetails> orderDetailses;
@@ -57,19 +59,16 @@ public class OrderList implements Serializable{
     public OrderList() {
     }
 
-    public OrderList(int orderId, LocalDate orderDate, String promotionCode, int amount, LocalDate expires, List<OrderDetails> orderDetailses, Customer customer) {
+    public OrderList(int orderId, LocalDate orderDate, int amount, String address, String numberPhone, String description, List<OrderDetails> orderDetailses, Customer customer) {
         this.orderId = orderId;
         this.orderDate = orderDate;
-        this.promotionCode = promotionCode;
         this.amount = amount;
-        this.expires = expires;
+        this.address = address;
+        this.numberPhone = numberPhone;
+        this.description = description;
         this.orderDetailses = orderDetailses;
         this.customer = customer;
     }
-
-    
-
-    
 
     public int getOrderId() {
         return orderId;
@@ -77,15 +76,6 @@ public class OrderList implements Serializable{
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
-    }
-
-    
-    public String getPromotionCode() {
-        return promotionCode;
-    }
-
-    public void setPromotionCode(String promotionCode) {
-        this.promotionCode = promotionCode;
     }
 
     public LocalDate getOrderDate() {
@@ -96,18 +86,6 @@ public class OrderList implements Serializable{
         this.orderDate = orderDate;
     }
 
-    public LocalDate getExpires() {
-        return expires;
-    }
-
-    public void setExpires(LocalDate expires) {
-        this.expires = expires;
-    }
-
-    
-    
-    
-    
     public int getAmount() {
         return amount;
     }
@@ -116,6 +94,29 @@ public class OrderList implements Serializable{
         this.amount = amount;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getNumberPhone() {
+        return numberPhone;
+    }
+
+    public void setNumberPhone(String numberPhone) {
+        this.numberPhone = numberPhone;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public List<OrderDetails> getOrderDetailses() {
         return orderDetailses;
@@ -132,6 +133,6 @@ public class OrderList implements Serializable{
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    
-    
+
+   
 }

@@ -25,8 +25,9 @@ public class OrderDetails implements Serializable{
     
     @Column(name = "quantity")
     private int quantity;
-    @Column(name = "VAT")
-    private int VAT;
+    
+    @Column(name = "price")
+    private int price;
     
     @ManyToOne
     @JoinColumn(name = "Product_productId")
@@ -39,17 +40,13 @@ public class OrderDetails implements Serializable{
     public OrderDetails() {
     }
 
-    public OrderDetails(int orderDetailsId, int quantity, int VAT, Product product, OrderList orderLists) {
+    public OrderDetails(int orderDetailsId, int quantity, int price, Product product, OrderList orderLists) {
         this.orderDetailsId = orderDetailsId;
         this.quantity = quantity;
-        this.VAT = VAT;
+        this.price = price;
         this.product = product;
         this.orderLists = orderLists;
     }
-
-    
-
-    
 
     public int getOrderDetailsId() {
         return orderDetailsId;
@@ -67,12 +64,12 @@ public class OrderDetails implements Serializable{
         this.quantity = quantity;
     }
 
-    public int getVAT() {
-        return VAT;
+    public int getPrice() {
+        return price;
     }
 
-    public void setVAT(int VAT) {
-        this.VAT = VAT;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public Product getProduct() {

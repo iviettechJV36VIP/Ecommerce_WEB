@@ -32,10 +32,10 @@
                                         <h1><span>E</span>-SHOPPER</h1>
                                         <h2>Free E-Commerce Template</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
+                                      
                                     </div>
                                     <div class="col-sm-6">
-                                        <img src="${pageContext.request.getContextPath()}/resources/images/home/girl1.jpg" class="girl img-responsive" alt="" />
+                                        <img src="${pageContext.request.getContextPath()}/resources/images/item/rsz_iphone-12-6131-1601627334.jpg" class="girl img-responsive" style="width: 484px; height: 441px;" alt="" />
                                         <!--
                                         <img src="${pageContext.request.getContextPath()}/resources/images/home/pricing.png" alt=""/>
                                         -->
@@ -46,10 +46,9 @@
                                         <h1><span>E</span>-SHOPPER</h1>
                                         <h2>100% Responsive Design</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
                                     </div>
                                     <div class="col-sm-6">
-                                        <img src="${pageContext.request.getContextPath()}/resources/images/home/girl2.jpg" class="girl img-responsive" alt="" />
+                                        <img src="${pageContext.request.getContextPath()}/resources/images/item/rsz_5f8800ad8f358-smart-tivi-samsung-4k-43-inch-43tu8000-hgqvbn.jpg" class="girl img-responsive"  style="width: 484px; height: 441px;" alt="" />
                                         <img src="images/home/pricing.png"  class="pricing" alt="" />
                                     </div>
                                 </div>
@@ -59,10 +58,9 @@
                                         <h1><span>E</span>-SHOPPER</h1>
                                         <h2>Free Ecommerce Template</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
                                     </div>
                                     <div class="col-sm-6">
-                                        <img src="${pageContext.request.getContextPath()}/resources/images/home/girl3.jpg" class="girl img-responsive" alt="" />
+                                        <img src="${pageContext.request.getContextPath()}/resources/images/item/rsz_5f8800ad8f358-smart-tivi-samsung-4k-43-inch-43tu8000-hgqvbn.jpg" class="girl img-responsive"  style="width: 484px; height: 441px;" alt="" />
                                         <img src="images/home/pricing.png" class="pricing" alt="" />
                                     </div>
                                 </div>

@@ -28,7 +28,7 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     @Query(value = "select * from product where Producer_producerId=?1", nativeQuery = true)
     List<Product> findListProductByProducer(int producer);
     
-    @Query(value = "select * from product where productName like '%?1%' or price like '%?1%'", nativeQuery = true)
+    @Query(value = "select * from product where productName like %?1% or price like %?1%" , nativeQuery = true)
     List<Product> search(String keyword);
     
 }
