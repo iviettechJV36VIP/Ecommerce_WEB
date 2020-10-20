@@ -108,7 +108,6 @@ public class OrderList implements Serializable{
         this.numberPhone = numberPhone;
     }
 
-
     public List<OrderDetails> getOrderDetailses() {
         return orderDetailses;
     }
@@ -125,5 +124,4 @@ public class OrderList implements Serializable{
         this.customer = customer;
     }
 
-    
 }

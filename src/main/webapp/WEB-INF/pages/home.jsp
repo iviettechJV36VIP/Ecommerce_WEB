@@ -124,7 +124,7 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="${pageContext.request.getContextPath()}/resources/images/laptop/1-org.jpg" alt="" />
+                                                <img src="${pageContext.request.getContextPath()}/resources/images/item/${tempProductHot.images[0].imageName}" alt="" />
                                                 <h2>${tempProductHot.formattedPrice}</h2>
                                                 <p>${tempProductHot.productName}</p>
                                             </div>
@@ -155,7 +155,7 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="${pageContext.request.getContextPath()}/resources/images/laptop/1-org.jpg" alt="" />
+                                                <img src="${pageContext.request.getContextPath()}/resources/images/item/${tempProductNew.images[0].imageName}" alt="" />
                                                 <h2>${tempProductNew.formattedPrice}</h2>
                                                 <p>${tempProductNew.productName}</p>
 

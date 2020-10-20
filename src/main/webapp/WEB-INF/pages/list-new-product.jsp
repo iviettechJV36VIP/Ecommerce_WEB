@@ -32,10 +32,10 @@
                                         <h1><span>E</span>-SHOPPER</h1>
                                         <h2>Free E-Commerce Template</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
+                                      
                                     </div>
                                     <div class="col-sm-6">
-                                        <img src="${pageContext.request.getContextPath()}/resources/images/home/girl1.jpg" class="girl img-responsive" alt="" />
+                                        <img src="${pageContext.request.getContextPath()}/resources/images/item/rsz_iphone-12-6131-1601627334.jpg" class="girl img-responsive" style="width: 484px; height: 441px;" alt="" />
                                         <!--
                                         <img src="${pageContext.request.getContextPath()}/resources/images/home/pricing.png" alt=""/>
                                         -->
@@ -46,10 +46,9 @@
                                         <h1><span>E</span>-SHOPPER</h1>
                                         <h2>100% Responsive Design</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
                                     </div>
                                     <div class="col-sm-6">
-                                        <img src="${pageContext.request.getContextPath()}/resources/images/home/girl2.jpg" class="girl img-responsive" alt="" />
+                                        <img src="${pageContext.request.getContextPath()}/resources/images/item/rsz_5f8800ad8f358-smart-tivi-samsung-4k-43-inch-43tu8000-hgqvbn.jpg" class="girl img-responsive"  style="width: 484px; height: 441px;" alt="" />
                                         <img src="images/home/pricing.png"  class="pricing" alt="" />
                                     </div>
                                 </div>
@@ -59,10 +58,9 @@
                                         <h1><span>E</span>-SHOPPER</h1>
                                         <h2>Free Ecommerce Template</h2>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
                                     </div>
                                     <div class="col-sm-6">
-                                        <img src="${pageContext.request.getContextPath()}/resources/images/home/girl3.jpg" class="girl img-responsive" alt="" />
+                                        <img src="${pageContext.request.getContextPath()}/resources/images/item/rsz_5f8800ad8f358-smart-tivi-samsung-4k-43-inch-43tu8000-hgqvbn.jpg" class="girl img-responsive"  style="width: 484px; height: 441px;" alt="" />
                                         <img src="images/home/pricing.png" class="pricing" alt="" />
                                     </div>
                                 </div>
@@ -123,7 +121,7 @@
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="${pageContext.request.getContextPath()}/resources/images/laptop/1-org.jpg" alt="" />
+                                                <img src="${pageContext.request.getContextPath()}/resources/images/item/${tempProductNew.images[0].imageName}" alt="" />
                                                 <h2>${tempProductNew.formattedPrice}</h2>
                                                 <p>${tempProductNew.productName}</p>
 
@@ -145,102 +143,7 @@
 
                         </div>
 
-                        <div class="recommended_items"><!--recommended_items-->
-                            <h2 class="title text-center">recommended items</h2>
-
-                            <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <div class="col-sm-4">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        <img src="images/laptop/1.jpg" alt="" />
-                                                        <h2>$56</h2>
-                                                        <p>Easy Polo Black Edition</p>
-                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        <img src="images/home/recommend1.jpg" alt="" />
-                                                        <h2>$56</h2>
-                                                        <p>Easy Polo Black Edition</p>
-                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        <img src="images/home/recommend2.jpg" alt="" />
-                                                        <h2>$56</h2>
-                                                        <p>Easy Polo Black Edition</p>
-                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">	
-                                        <div class="col-sm-4">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        <img src="images/home/recommend1.jpg" alt="" />
-                                                        <h2>$56</h2>
-                                                        <p>Easy Polo Black Edition</p>
-                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        <img src="images/home/recommend2.jpg" alt="" />
-                                                        <h2>$56</h2>
-                                                        <p>Easy Polo Black Edition</p>
-                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="product-image-wrapper">
-                                                <div class="single-products">
-                                                    <div class="productinfo text-center">
-                                                        <img src="images/home/recommend3.jpg" alt="" />
-                                                        <h2>$56</h2>
-                                                        <p>Easy Polo Black Edition</p>
-                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>			
-                            </div>
-                        </div><!--/recommended_items-->
+                        
 
                     </div>
                 </div>

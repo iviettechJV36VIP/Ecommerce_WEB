@@ -7,10 +7,12 @@ package com.nhattrung.controller;
 
 import com.nhattrung.entity.Customer;
 import com.nhattrung.entity.Item;
+import com.nhattrung.entity.OrderDetails;
 import com.nhattrung.entity.OrderList;
 import com.nhattrung.entity.Product;
 import com.nhattrung.service.CategoryService;
 import com.nhattrung.service.CustomerSerivce;
+import com.nhattrung.service.OrderDetailsService;
 import com.nhattrung.service.OrderListService;
 import com.nhattrung.service.ProducerService;
 import com.nhattrung.service.ProductService;
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Administrator
  */
 @Controller
+@Transactional(rollbackFor = Exception.class)
 @RequestMapping(value = "/")
 public class CartController {
 
@@ -54,6 +58,9 @@ public class CartController {
     
     @Autowired
     private OrderListService orderListService;
+    
+    @Autowired
+    private OrderDetailsService orderDetailsService;
 
     @RequestMapping(value = {"/cart"
     }, method = RequestMethod.GET)
@@ -93,16 +100,7 @@ public class CartController {
         }
         return "redirect:/cart";
     }
-
-    @RequestMapping(value = "/remove/{productId}", method = RequestMethod.GET)
-    public String remove(@PathVariable("productId") int productId, HttpSession session) {
-        List<Item> cart = (List<Item>) session.getAttribute("cart");
-        int index = this.exists(productId, cart);
-        cart.remove(index);
-        session.setAttribute("cart", cart);
-        return "redirect:/cart";
-    }
-
+    
     @RequestMapping(value = "/cart/checkout", method = RequestMethod.GET)
     public String checkout(Authentication authentication, HttpSession session, ModelMap modelMap) {
 
@@ -117,23 +115,44 @@ public class CartController {
         }
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat c = NumberFormat.getCurrencyInstance(localeVN);
-
+        modelMap.put("total", c.format(total));
+        
         OrderList orderList = new OrderList();
         orderList.setAmount(total);
         Customer customer=customerSerivce.getCustomerDetails();
         orderList.setAddress(customer.getCustomerAddress());
         orderList.setNumberPhone(customer.getPhone());
-        //orderList.setOrderDate(LocalDate.now());
+        orderList.setOrderDate(LocalDate.now());
         orderList.setCustomer(customer);
         orderList = orderListService.save(orderList);
         
+        List<Item> cart = (List<Item>) session.getAttribute("cart");
+        for(Item item: cart){
+            OrderDetails orderDetails = new OrderDetails();
+            orderDetails.setOrderLists(orderList);
+            orderDetails.setProduct(item.getProduct());
+            orderDetails.setPrice(item.getProduct().getPrice());
+            orderDetails.setQuantity(item.getQuantity());
+            orderDetailsService.save(orderDetails);
+        }
         
         
-      //  modelMap.put("total", c.format(total));
+      
         return "checkout";
 
     }
 
+
+    @RequestMapping(value = "/remove/{productId}", method = RequestMethod.GET)
+    public String remove(@PathVariable("productId") int productId, HttpSession session) {
+        List<Item> cart = (List<Item>) session.getAttribute("cart");
+        int index = this.exists(productId, cart);
+        cart.remove(index);
+        session.setAttribute("cart", cart);
+        return "redirect:/cart";
+    }
+
+    
     private int exists(int productId, List<Item> cart) {
         for (int i = 0; i < cart.size(); i++) {
             if (cart.get(i).getProduct().getProductId() == productId) {

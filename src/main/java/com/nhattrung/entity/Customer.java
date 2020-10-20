@@ -95,10 +95,6 @@ public class Customer implements Serializable{
         this.accountRoles = accountRoles;
     }
 
-    
-
-    
-
     public int getCustomerId() {
         return customerId;
     }
@@ -130,8 +126,6 @@ public class Customer implements Serializable{
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
-
-    
 
     public String getSex() {
         return sex;
@@ -197,14 +191,6 @@ public class Customer implements Serializable{
         this.password = password;
     }
 
-    public List<OrderList> getOrderLists() {
-        return orderLists;
-    }
-
-    public void setOrderLists(List<OrderList> orderLists) {
-        this.orderLists = orderLists;
-    }
-
     public String getEnabled() {
         return enabled;
     }
@@ -212,8 +198,14 @@ public class Customer implements Serializable{
     public void setEnabled(String enabled) {
         this.enabled = enabled;
     }
-    
-    
+
+    public List<OrderList> getOrderLists() {
+        return orderLists;
+    }
+
+    public void setOrderLists(List<OrderList> orderLists) {
+        this.orderLists = orderLists;
+    }
 
     public List<AccountRole> getAccountRoles() {
         return accountRoles;
@@ -223,12 +215,4 @@ public class Customer implements Serializable{
         this.accountRoles = accountRoles;
     }
 
-    
-    
-    
-
-    
-    
-    
-    
 }
