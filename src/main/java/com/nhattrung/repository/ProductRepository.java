@@ -17,7 +17,11 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     List<Product> findByNote(String note);
 
    
-    Product findById(int productId);
+    @Query(value = "select * from product where productName like ?1 or price like ?2 or dateAdded like ?3 or note like ?4",
+            nativeQuery = true)
+    List<Product> findListByProductNameLikeOrPriceLikeOrDateAddedOrNoteLike(String productName,String price, String dateAddedd, String note);
+    
+    Product findByProductId(int productId);
 
     @Query(value = "select * from  product where (CURDATE() - dateAdded)<=?1", nativeQuery = true)
     List<Product> getByNoteNew(int num);

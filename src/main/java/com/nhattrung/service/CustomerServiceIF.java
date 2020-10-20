@@ -15,4 +15,7 @@ public interface CustomerServiceIF {
     List<Customer> findAllCustomer();
     
     Customer getCustomerDetails();
+    
+    public List<Customer> getListCustomersSearch(String searchText);
+    public Customer getCustomerById(int customerId);
 }

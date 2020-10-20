@@ -47,14 +47,12 @@ public class Customer implements Serializable{
     
     @Column(name = "email")
     private String email;
+    
     @Column(name = "phone")
     private String phone;
     
     @Column(name = "customerAddress")
     private String customerAddress;
-    
-    @Column(name = "customerDistrict")
-    private String customerDistrict;
     
     @Column(name = "customerCity")
     private String customerCity;
@@ -66,7 +64,7 @@ public class Customer implements Serializable{
     private String password;
     
     @Column(name = "enabled")
-    private String enabled;
+    private boolean enabled;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private List<OrderList> orderLists;
@@ -77,7 +75,7 @@ public class Customer implements Serializable{
     public Customer() {
     }
 
-    public Customer(int customerId, String customerFirstName, String customerLastName, LocalDate birthdate, String sex, String email, String phone, String customerAddress, String customerDistrict, String customerCity, String username, String password, String enabled, List<OrderList> orderLists, List<AccountRole> accountRoles) {
+    public Customer(int customerId, String customerFirstName, String customerLastName, LocalDate birthdate, String sex, String email, String phone, String customerAddress, String customerCity, String username, String password, boolean enabled, List<OrderList> orderLists, List<AccountRole> accountRoles) {
         this.customerId = customerId;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
@@ -86,7 +84,6 @@ public class Customer implements Serializable{
         this.email = email;
         this.phone = phone;
         this.customerAddress = customerAddress;
-        this.customerDistrict = customerDistrict;
         this.customerCity = customerCity;
         this.username = username;
         this.password = password;
@@ -159,14 +156,6 @@ public class Customer implements Serializable{
         this.customerAddress = customerAddress;
     }
 
-    public String getCustomerDistrict() {
-        return customerDistrict;
-    }
-
-    public void setCustomerDistrict(String customerDistrict) {
-        this.customerDistrict = customerDistrict;
-    }
-
     public String getCustomerCity() {
         return customerCity;
     }
@@ -191,11 +180,11 @@ public class Customer implements Serializable{
         this.password = password;
     }
 
-    public String getEnabled() {
+    public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(String enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
@@ -215,4 +204,6 @@ public class Customer implements Serializable{
         this.accountRoles = accountRoles;
     }
 
+    
+    
 }

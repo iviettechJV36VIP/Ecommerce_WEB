@@ -11,7 +11,7 @@ import com.nhattrung.entity.OrderDetails;
 import com.nhattrung.entity.OrderList;
 import com.nhattrung.entity.Product;
 import com.nhattrung.service.CategoryService;
-import com.nhattrung.service.CustomerSerivce;
+import com.nhattrung.service.CustomerService;
 import com.nhattrung.service.OrderDetailsService;
 import com.nhattrung.service.OrderListService;
 import com.nhattrung.service.ProducerService;
@@ -54,7 +54,7 @@ public class CartController {
     private ProducerService producerService;
 
     @Autowired
-    private CustomerSerivce customerSerivce;
+    private CustomerService customerService;
     
     @Autowired
     private OrderListService orderListService;
@@ -119,7 +119,7 @@ public class CartController {
         
         OrderList orderList = new OrderList();
         orderList.setAmount(total);
-        Customer customer=customerSerivce.getCustomerDetails();
+        Customer customer=customerService.getCustomerDetails();
         orderList.setAddress(customer.getCustomerAddress());
         orderList.setNumberPhone(customer.getPhone());
         orderList.setOrderDate(LocalDate.now());

@@ -34,7 +34,7 @@ public class ProductService implements ProductServiceIF{
 
     @Override
     public Product getProductDetails(int productId) {
-        return  productRepository.findById(productId);
+        return  productRepository.findByProductId(productId);
     }
 
     @Override
@@ -57,4 +57,15 @@ public class ProductService implements ProductServiceIF{
         return productRepository.search(keyword);
     }
 
+    
+    @Override
+    public List<Product> getListProductsSearch(String searchText) {
+        searchText = "%" + searchText +"%";
+         return productRepository.findListByProductNameLikeOrPriceLikeOrDateAddedOrNoteLike(searchText, searchText, searchText, searchText);
+    }
+
+    @Override
+    public Product getProductByProductId(int productId) {
+        return productRepository.findByProductId(productId);
+    }
 }

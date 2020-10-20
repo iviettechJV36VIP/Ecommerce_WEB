@@ -20,4 +20,7 @@ public interface ProductServiceIF {
     public List<Product> getListProductByProducer(int producer);
     public List<Product> getAllProduct();
     public List<Product> searchProduct(String keyword);
+    
+    public List<Product> getListProductsSearch(String searchText);
+    public Product getProductByProductId(int productId);
 }
