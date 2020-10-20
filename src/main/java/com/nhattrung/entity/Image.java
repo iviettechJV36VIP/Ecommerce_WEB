@@ -32,7 +32,6 @@ public class Image implements Serializable{
     public Image() {
     }
 
-    
     public Image(int imageNo, String imageName, Product product) {
         this.imageNo = imageNo;
         this.imageName = imageName;
@@ -65,9 +64,4 @@ public class Image implements Serializable{
 
     
 
-    
-
-    
-    
-    
 }

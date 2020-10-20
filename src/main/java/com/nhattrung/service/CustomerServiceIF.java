@@ -13,4 +13,6 @@ import org.springframework.stereotype.Service;
 public interface CustomerServiceIF {
     Customer getCustomerByUsername(String username);
     List<Customer> findAllCustomer();
+    
+    Customer getCustomerDetails();
 }

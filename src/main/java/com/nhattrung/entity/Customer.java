@@ -48,7 +48,7 @@ public class Customer implements Serializable{
     @Column(name = "email")
     private String email;
     @Column(name = "phone")
-    private int phone;
+    private String phone;
     
     @Column(name = "customerAddress")
     private String customerAddress;
@@ -77,7 +77,7 @@ public class Customer implements Serializable{
     public Customer() {
     }
 
-    public Customer(int customerId, String customerFirstName, String customerLastName, LocalDate birthdate, String sex, String email, int phone, String customerAddress, String customerDistrict, String customerCity, String username, String password, String enabled, List<OrderList> orderLists, List<AccountRole> accountRoles) {
+    public Customer(int customerId, String customerFirstName, String customerLastName, LocalDate birthdate, String sex, String email, String phone, String customerAddress, String customerDistrict, String customerCity, String username, String password, String enabled, List<OrderList> orderLists, List<AccountRole> accountRoles) {
         this.customerId = customerId;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
@@ -149,11 +149,11 @@ public class Customer implements Serializable{
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

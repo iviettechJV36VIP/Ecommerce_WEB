@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
@@ -10,41 +11,112 @@
     <jsp:include page="include/res.jsp"/>
 
     <body>
-        <!--/header-->
         <jsp:include page="include/header.jsp"/>
 
-        <section id="form"><!--form-->
+        <section id="cart_items">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-4 col-sm-offset-1">
-                        <div class="login-form"><!--login form-->
-                            <h2>Login to your account</h2>
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li><a href="<c:url value="/home" />">Home</a></li>
+                        <li><a href="<c:url value="/cart" />">Shopping Cart</a></li>
+                        <li class="active">Check out</li>
+                    </ol>
+                </div><!--/breadcrums-->
 
-                            <c:if test="${not empty error}">
-                                <div class="error">${error}</div>
-                            </c:if>
-                            <c:if test="${not empty msg}">
-                                <div class="msg">${msg}</div>
-                            </c:if>
 
-                                
-                                    <form name="loginForm" action="<c:url value="/j_spring_security_check"/>" method="POST">
-                                        <input type="text"  name="username" placeholder="Username" />
-                                    <input type="password"  name="password" placeholder="Password" />
-                                 <a href="${pageContext.request.contextPath}/register">Tạo tài khoản mới</a>
-                                <button type="submit" class="btn btn-default">Login</button>
-                                
-                                
-                                <input type="hidden" name="${_csrf.parameterName}"
-                                       value="${_csrf.token}" />
-                                
-                            </form>
 
-                        </div><!--/login form-->
-                    </div>  
+                <div class="shopper-informations">
+                        <div class="row">
+
+                            <div class="col-sm-5 clearfix">
+                                <div class="bill-to">
+                                    <p>Information</p>
+                                    <div class="form-one">
+                                        <form>
+								<input type="text" placeholder="Display Name">
+								<input type="text" placeholder="User Name">
+								<input type="password" placeholder="Password">
+								<input type="password" placeholder="Confirm password">
+							</form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="order-message">
+                                    <p>Shipping Order</p>
+                                    <textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
+                                    <label><input type="checkbox"> Shipping to bill address</label>
+                                </div>	
+                            </div>
+
+                        </div>
+                </div>
+                <div class="review-payment">
+                    <h2>Review & Payment</h2>
+                </div>
+
+                <div class="table-responsive cart_info">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr class="cart_menu">
+                                <td class="image">Item</td>
+                                <td class="description"></td>
+                                <td class="price">Price</td>
+                                <td class="quantity">Quantity</td>
+                                <td class="total">Total</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="item" items="${sessionScope.cart}">
+                                <tr>
+                                    <td class="cart_product">
+                                        <a href=""><img src="images/cart/three.png" alt=""></a>
+                                    </td>
+                                    <td class="cart_description">
+                                        <h4><a href="">${item.product.productName}</a></h4>
+                                        <p>Product ID: ${item.product.productId}</p>
+                                    </td>
+                                    <td class="cart_price">
+                                        <p>${item.product.formattedPrice}</p>
+                                    </td>
+                                    <td class="cart_quantity">
+                                        <input style="width: 60px" type="number" name="quantities" value="${item.quantity}">
+                                    </td>
+                                    <td class="cart_total">
+                                        <p class="cart_total_price"> <fmt:formatNumber value = "${item.product.price * item.quantity}" type = "currency"/></p>
+                                    </td>
+                                    <td class="cart_delete">
+                                        <a class="cart_quantity_delete" href="<c:url value="/remove/${item.product.productId}" />"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </section><!--/form-->
+        </section>
+
+        <section id="do_action">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="total_area">
+                            <ul>
+                                <li>Total <span>${total}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <a class="btn btn-default check_out" href="<c:url value="/cart/checkout" />">Confirm</a>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
 
         <footer id="footer"><!--Footer-->
@@ -139,7 +211,7 @@
                                     <li><a href="">Contact Us</a></li>
                                     <li><a href="">Order Status</a></li>
                                     <li><a href="">Change Location</a></li>
-                                    <li><a href="">FAQ?s</a></li>
+                                    <li><a href="">FAQ’s</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -207,6 +279,10 @@
 
 
 
-        
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.scrollUp.min.js"></script>
+        <script src="js/jquery.prettyPhoto.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>

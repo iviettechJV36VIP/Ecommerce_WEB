@@ -88,7 +88,5 @@ public class OrderDetails implements Serializable{
         this.orderLists = orderLists;
     }
 
-    
-    
-    
+   
 }

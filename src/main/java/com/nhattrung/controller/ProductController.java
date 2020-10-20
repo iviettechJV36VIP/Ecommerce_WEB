@@ -117,7 +117,6 @@ public class ProductController {
 
     @RequestMapping(value = "/search")
     public String Search(@RequestParam("keyword") String keyword, Model model) {
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+keyword);
         if (keyword != null) {
             List<Product> searchResult = productService.searchProduct(keyword);
             model.addAttribute("searchResult", searchResult);

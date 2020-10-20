@@ -162,7 +162,7 @@
                                         <span>${product.formattedPrice}</span>
                                         <a href="<c:url value="/buy/${product.productId}" />" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </span>
-                                    <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+                                    <a href=""><img src="${pageContext.request.getContextPath()}/resources/images/item/${product.images[0].imageName}" class="share img-responsive"  alt="" /></a>
                                 </div><!--/product-information-->
                             </div>
                         </div><!--/product-details-->

@@ -52,19 +52,22 @@
                             <div class="shop-menu clearfix pull-right">
                                 <ul class="nav navbar-nav">
 
-                                    <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-
-
-                                    <form action="<c:url value='/j_spring_security_logout' />" method="post" id="logoutForm">
+                                    
+                                    
+                                        <form action="<c:url value='/j_spring_security_logout' />" method="post" id="logoutForm">
                                         <input type="hidden" name="${_csrf.parameterName}"
                                                value="${_csrf.token}" />
-                                    </form>
-                                    <script>
+                                        </form>
+                                    
+
+                                    
+                                    
+                                        <script>
                                         function formSubmit() {
                                             document.getElementById("logoutForm").submit();
                                         }
                                     </script>
+                                    
 
                                     <c:if test="${pageContext.request.userPrincipal.name != null}">
                                         <li>
@@ -74,7 +77,7 @@
                                         <li><a href=""><i class="fa fa-user"></i> Account</a></li>
                                         </c:if>
                                         <c:if test="${pageContext.request.userPrincipal.name == null}" >
-                                        <li><a href="login"><i class="fa fa-lock"></i> Login</a></li>
+                                        <li><a href="<c:url value="/login" />"><i class="fa fa-lock"></i> Login</a></li>
                                         </c:if>
 
 
@@ -100,17 +103,10 @@
                             </div>
                             <div class="mainmenu pull-left">
                                 <ul class="nav navbar-nav collapse navbar-collapse">
-                                    <li><a href="<c:url value="/home" />">Home</a></li>
-                                    <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                        <ul role="menu" class="sub-menu">
-                                            <li><a href="shop.html">Products</a></li>
-                                            <li><a href="product-details.html">Product Details</a></li> 
-                                            <li><a href="checkout.html">Checkout</a></li> 
-                                            <li><a href="cart.html">Cart</a></li> 
-
-
-
-                                        </ul>
+                                    <li><a href="<c:url value="/home" />"><i class="fa fa-home"></i> Home</a></li>
+                                    <li><a href="<c:url value="/cart/checkout"/>"><i class="fa fa-crosshairs"></i> Check Out</a>
+                                    <li><a href="<c:url value="/cart"/>"><i class="fa fa-shopping-cart"></i> Cart</a>
+                                        
                                     </li> 
                                     <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
