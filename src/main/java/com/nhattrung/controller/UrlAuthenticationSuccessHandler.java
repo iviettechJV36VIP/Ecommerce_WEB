@@ -66,7 +66,7 @@ public class UrlAuthenticationSuccessHandler
         }
  
         if (isCustomer) {
-            return "/customer";
+            return "/home";
         } else if (isAdmin) {
             return "/admin";
         } if (isStaff) {

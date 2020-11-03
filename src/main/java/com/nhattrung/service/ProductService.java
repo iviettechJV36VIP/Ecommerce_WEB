@@ -68,4 +68,9 @@ public class ProductService implements ProductServiceIF{
     public Product getProductByProductId(int productId) {
         return productRepository.findByProductId(productId);
     }
+
+    @Override
+    public List<Product> getBestSell() {
+        return  productRepository.searchBestSell();
+    }
 }

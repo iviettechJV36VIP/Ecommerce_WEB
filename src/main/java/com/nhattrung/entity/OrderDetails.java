@@ -26,8 +26,6 @@ public class OrderDetails implements Serializable{
     @Column(name = "quantity")
     private int quantity;
     
-    @Column(name = "price")
-    private int price;
     
     @ManyToOne
     @JoinColumn(name = "Product_productId")
@@ -40,10 +38,9 @@ public class OrderDetails implements Serializable{
     public OrderDetails() {
     }
 
-    public OrderDetails(int orderDetailsId, int quantity, int price, Product product, OrderList orderLists) {
+    public OrderDetails(int orderDetailsId, int quantity, Product product, OrderList orderLists) {
         this.orderDetailsId = orderDetailsId;
         this.quantity = quantity;
-        this.price = price;
         this.product = product;
         this.orderLists = orderLists;
     }
@@ -64,14 +61,6 @@ public class OrderDetails implements Serializable{
         this.quantity = quantity;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public Product getProduct() {
         return product;
     }
@@ -88,5 +77,5 @@ public class OrderDetails implements Serializable{
         this.orderLists = orderLists;
     }
 
-   
+    
 }

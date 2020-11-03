@@ -30,11 +30,6 @@ public class CustomerService implements CustomerServiceIF{
     }
 
     @Override
-    public List<Customer> findAllCustomer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Customer getCustomerDetails() {
         Customer customer = new Customer();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -46,7 +41,7 @@ public class CustomerService implements CustomerServiceIF{
     @Override
     public List<Customer> getListCustomersSearch(String searchText) {
         searchText = "%" + searchText +"%";
-        return (List)customerRepository.findListByCustomerFirstNameLikeOrCustomerLastNameLikeOrSexLikeOrCustomerAddressLike(searchText, searchText, searchText, searchText);
+        return (List)customerRepository.findListByCustomerFirstNameLikeOrCustomerLastNameLikeOrSexLikeOrCustomerEmailLike(searchText, searchText, searchText, searchText);
     }
 
     @Override

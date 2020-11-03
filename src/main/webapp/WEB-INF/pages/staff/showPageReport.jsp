@@ -3,7 +3,7 @@
     Created on : Oct 14, 2020, 2:10:54 PM
     Author     : Dell
 --%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -28,16 +28,16 @@
           rel="stylesheet">
     <link href="<c:url value="/resources/css/responsive.css" />"
           rel="stylesheet">
-    
+
     <script src="<c:url value="/resources/js/jquery.js" />"></script>
-        <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-        <script src="<c:url value="/resources/js/jquery.scrollUp.min.js" />"></script>
-        <script src="<c:url value="/resources/js/price-range.js" />"></script>
-        <script src="<c:url value="/resources/js/jjquery.prettyPhoto.js" />"></script>
-        <script src="<c:url value="/resources/js/main.js" />"></script>
-    
+    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+    <script src="<c:url value="/resources/js/jquery.scrollUp.min.js" />"></script>
+    <script src="<c:url value="/resources/js/price-range.js" />"></script>
+    <script src="<c:url value="/resources/js/jjquery.prettyPhoto.js" />"></script>
+    <script src="<c:url value="/resources/js/main.js" />"></script>
+
     <body>
-        
+
 
         <form action="<c:url value='/j_spring_security_logout' />" method="post" id="logoutForm">
             <input type="hidden" name="${_csrf.parameterName}"
@@ -48,7 +48,7 @@
         </c:if>
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
-        
+
         <li><a>Wellcome, ${pageContext.request.userPrincipal.name}   |</a> 
         </li>
         <li><a href="javascript:formSubmit()"> Logout</a></li>
@@ -82,7 +82,7 @@
                                 <a href="${pageContext.request.getContextPath()}/showPageReport">Report</a>
                             </li>
 
-                            
+
                         </ul>
                     </li>
 
@@ -97,77 +97,74 @@
 
     <div class="content-box-large">
 
-        
+        <div class="input-group form">
+            <form action="${pageContext.request.getContextPath()}/dailyReport" method="get">
+
+
+                <label >DAILY REPORT</label>
+                <input type="text" size="100" class="input-group" name="date" placeholder="enter Date">
+
+                <span class="input-group-btn">
+                    <!-- <button class="btn btn-primary" type="button">Search</button> -->
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                </span>
+            </form>
+        </div>
         <div class="panel-body">
 
             <div class="table-responsive">
-                
+
                 <table class="table">
                     <thead>
                         <tr>
                             <th></th>
                             <th></th>
-                            <th>ALL ORDERS</th>
+                            <th>RESULT ORDERS</th>
                         </tr>
                         <tr>
                             <th>Order Id</th>
                             <th>Order Date</th>
                             <th>Address</th>
                             <th>Phone</th>
-                            <th>Full Name</th>
+                            <th>Customer Full Name</th>
                             <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="order" items="${orderList.pageList}">
+                        <c:set var="totalMoneyInDate" value="${0}" /> 
+                        <c:forEach var="order" items="${orderLists}">
+                            <c:set var="totalMoneyInDate" value="${totalMoneyInDate + order.amount}" />
                             <tr>
                                 <td>${order.orderId}</td>
                                 <td>${order.orderDate}</td>
                                 <td>${order.customer.customerAddress}</td>
                                 <td>${order.customer.phone}</td>
                                 <td>${order.customer.customerFirstName} ${order.customer.customerLastName}</td>
-                                
-                                <td><fmt:formatNumber value="${order.amount}" type="currency"/></td>
-                                <td><a href="${pageContext.request.getContextPath()}/viewOrderDetails/${order.orderId}">View Order Details</a></td>
-                                
+                                <td>${order.amount}</td>
+
                             </tr>
 
                         </c:forEach>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Total Money In Date:    </th>
+                            <th>${totalMoneyInDate}</th>
+                        </tr>
                     </tbody>
-                    
+
                 </table>
-                
-                <c:choose>
-                    <c:when test="${orderList.firstPage}">
-                        <span>Prev</span>
-                    </c:when>
-                    <c:otherwise>
-                        <c:url value="/showOrder/prev" var="url" />                  
-                        <a href='<c:out value="${url}" />'>Prev</a>
-                    </c:otherwise>
-                </c:choose>
-                <c:forEach begin="1" end="${orderList.pageCount}" step="1"  varStatus="tagStatus">
-                    <c:choose>
+                <div class="input-group form">
+                    
+                    
+                    <a href="${pageContext.request.getContextPath()}/dailyReport/excel">Download Excel</a>
+                    
+                </div>
 
-                        <c:when test="${(orderList.page + 1) == tagStatus.index}">
-                            <span>${tagStatus.index}</span>
-                        </c:when>
-                        <c:otherwise>
-                            <c:url value="/showOrder/${tagStatus.index}" var="url" />                  
-                            <a href='<c:out value="${url}" />'>${tagStatus.index}</a>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-                <c:choose>
 
-                    <c:when test="${orderList.lastPage}">
-                        <span>Next</span>
-                    </c:when>
-                    <c:otherwise>
-                        <c:url value="/orderList/next" var="url" />                  
-                        <a href='<c:out value="${url}" />'>Next</a>
-                    </c:otherwise>
-                </c:choose>
+
             </div>
         </div>
     </div>

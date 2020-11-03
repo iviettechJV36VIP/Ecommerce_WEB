@@ -5,9 +5,7 @@
  */
 package com.nhattrung.repository;
 
-import com.nhattrung.entity.OrderList;
-import java.util.List;
-import org.springframework.data.jpa.repository.Query;
+import com.nhattrung.entity.Payment;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,12 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author Administrator
  */
 @Repository
-public interface OrderListRepository extends CrudRepository<OrderList, Integer>{
-    
-    
-    @Query(value = " Select * from orderlist where orderDate like ?1 ",
-            nativeQuery = true)
-    List<OrderList> findOrderListByOrderDateLike(String orderDate);
-    
+public interface PaymentRepository extends CrudRepository<Payment, Integer>{
     
 }

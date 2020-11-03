@@ -10,6 +10,7 @@ import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -36,8 +37,6 @@ public class Product implements Serializable{
     @Column(name = "price")
     private int price;
     
-    @Column(name = "comment")
-    private String comment;
     
     @Column(name = "note")
     private String note;
@@ -54,20 +53,19 @@ public class Product implements Serializable{
     @JoinColumn(name = "Producer_producerId")
     private Producer producer;
     
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
     private List<Image> images;
     
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<OrderDetails> orderDetailses;
 
     public Product() {
     }
 
-    public Product(int productId, String productName, int price, String comment, String note, LocalDate dateAdded, Category category, Producer producer, List<Image> images, List<OrderDetails> orderDetailses) {
+    public Product(int productId, String productName, int price, String note, LocalDate dateAdded, Category category, Producer producer, List<Image> images, List<OrderDetails> orderDetailses) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
-        this.comment = comment;
         this.note = note;
         this.dateAdded = dateAdded;
         this.category = category;
@@ -103,13 +101,6 @@ public class Product implements Serializable{
         this.price = price;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 
     public Category getCategory() {
         return category;

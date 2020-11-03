@@ -23,4 +23,6 @@ public interface ProductServiceIF {
     
     public List<Product> getListProductsSearch(String searchText);
     public Product getProductByProductId(int productId);
+    
+    public List<Product> getBestSell();
 }

@@ -7,6 +7,7 @@ package com.nhattrung.service;
 
 import com.nhattrung.entity.OrderList;
 import com.nhattrung.repository.OrderListRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,14 @@ public class OrderListService implements OrderListServiceIF{
     @Override
     public OrderList findId(int orderId) {
         return orderListRepository.findById(orderId).get();
+    }
+
+    
+
+    @Override
+    public List<OrderList> getOrderByOrderLike(String date) {
+        date = "%" +date+ "%";
+        return orderListRepository.findOrderListByOrderDateLike(date);
     }
     
 }

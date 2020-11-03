@@ -55,12 +55,19 @@ public class ProductController {
         pagedListHolder1.setPageSize(3);
         theModel.addAttribute("pagedListHolder1", pagedListHolder1);
 
-        List<Product> products2 = productService.getListProductByNoteIsNew(30);
+        List<Product> products2 = productService.getListProductByNoteIsNew(100);
         PagedListHolder pagedListHolder2 = new PagedListHolder(products2);
         int page2 = ServletRequestUtils.getIntParameter(request, "p", 0);
         pagedListHolder2.setPage(page2);
         pagedListHolder2.setPageSize(3);
         theModel.addAttribute("pagedListHolder2", pagedListHolder2);
+        
+        List<Product> products3 = productService.getBestSell();
+        PagedListHolder pagedListHolder3 = new PagedListHolder(products3);
+        int page3 = ServletRequestUtils.getIntParameter(request, "p", 0);
+        pagedListHolder3.setPage(page3);
+        pagedListHolder3.setPageSize(3);
+        theModel.addAttribute("pagedListHolder3", pagedListHolder3);
 
         mm.put("listCategory", categoryService.getAllProductByCategory());
         mm.put("listProducer", producerService.getAllProductByProducer());
@@ -81,7 +88,7 @@ public class ProductController {
 
     @GetMapping(value = "/listAllProductNew")
     public String listProductNoteIsNew(HttpServletRequest request, Model theModel,ModelMap modelMap) {
-        List<Product> products1 = productService.getListProductByNoteIsNew(30);
+        List<Product> products1 = productService.getListProductByNoteIsNew(100);
         PagedListHolder pagedListHolder = new PagedListHolder(products1);
         int page1 = ServletRequestUtils.getIntParameter(request, "p", 0);
         theModel.addAttribute("pagedListHolder", pagedListHolder);
@@ -116,10 +123,12 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/search")
-    public String Search(@RequestParam("keyword") String keyword, Model model) {
+    public String Search(@RequestParam("keyword") String keyword, Model model, ModelMap modelMap) {
         if (keyword != null) {
             List<Product> searchResult = productService.searchProduct(keyword);
             model.addAttribute("searchResult", searchResult);
+            modelMap.put("listProducer", producerService.getAllProductByProducer());
+        modelMap.put("listCategory", categoryService.getAllProductByCategory());
         }
         
         return "search";

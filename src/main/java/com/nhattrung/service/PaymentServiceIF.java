@@ -5,8 +5,7 @@
  */
 package com.nhattrung.service;
 
-import com.nhattrung.entity.OrderList;
-import java.util.List;
+import com.nhattrung.entity.Payment;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,9 +13,6 @@ import org.springframework.stereotype.Service;
  * @author Administrator
  */
 @Service
-public interface OrderListServiceIF {
-    public OrderList save(OrderList orderList);
-    public OrderList findId(int orderId);
-    
-    public List<OrderList> getOrderByOrderLike(String date);
+public interface PaymentServiceIF {
+    public Payment save(Payment payment);
 }

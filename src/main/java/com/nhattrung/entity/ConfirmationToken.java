@@ -5,35 +5,35 @@
  */
 package com.nhattrung.entity;
 
-import java.time.LocalDate;
+
+import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.Column;
-import javax.persistence.Convert;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+
 
 @Entity
-public class ConfirmationToken {
+public class ConfirmationToken implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tokenId")
-    private long tokenId;
+    private int tokenId;
 
     @Column(name = "confirmationToken")
     private String confirmationToken;
 
     
 
-    @OneToOne(targetEntity = Customer.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "customerId")
+    @OneToOne
+    @JoinColumn( name = "customerId")
     private Customer customer;
 
     public ConfirmationToken() {
@@ -45,19 +45,23 @@ public class ConfirmationToken {
         confirmationToken = UUID.randomUUID().toString();
     }
 
-    public ConfirmationToken(long tokenId, String confirmationToken, Customer customer) {
+    public ConfirmationToken(int tokenId, String confirmationToken, Customer customer) {
         this.tokenId = tokenId;
         this.confirmationToken = confirmationToken;
         this.customer = customer;
     }
 
-    public long getTokenId() {
+    public int getTokenId() {
         return tokenId;
     }
 
-    public void setTokenId(long tokenId) {
+    public void setTokenId(int tokenId) {
         this.tokenId = tokenId;
     }
+
+    
+
+    
 
     public String getConfirmationToken() {
         return confirmationToken;

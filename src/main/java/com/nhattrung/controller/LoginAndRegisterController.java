@@ -12,10 +12,9 @@ import com.nhattrung.repository.AccountRoleRepository;
 import com.nhattrung.repository.ConfirmationTokenRepository;
 import com.nhattrung.repository.CustomerRepository;
 import com.nhattrung.service.EmailService;
-import com.nhattrung.service.Md5;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+
+import com.nhattrung.service.Md5Service;
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +55,9 @@ public class LoginAndRegisterController {
     private AccountRoleRepository accountRoleRepository;
     
     @Autowired
-    private Md5 md5;
+    private Md5Service md5Service;
+    
+    
     
     @RequestMapping(value="/admin")
     public String showAdminPage(Model model){
@@ -71,6 +72,8 @@ public class LoginAndRegisterController {
     public String showStaffPage(Model model){
         return "staff/staff";
     }
+    
+    
     
     @GetMapping(value = "/login")
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,
@@ -122,11 +125,11 @@ public class LoginAndRegisterController {
 
         Customer existingUser = customerRepository.findByEmail(customer.getEmail());
         if (existingUser != null) {
-            modelAndView.addObject("message", "This email already exists!");
-            modelAndView.setViewName("error");
+            modelAndView.addObject("error", "This email already exists!");
+            modelAndView.setViewName("register");
         } else {
             String password = customer.getPassword();
-            customer.setPassword(md5.md5(password));
+            customer.setPassword(md5Service.md5(password));
             customerRepository.save(customer);          
             ConfirmationToken confirmationToken = new ConfirmationToken(customer);
 
@@ -161,6 +164,7 @@ public class LoginAndRegisterController {
             customerRepository.save(customer);
             AccountRole accountRole = new AccountRole();
             accountRole.setCustomer(customer);
+            accountRole.setRoleName("ROLE_CUSTOMER");
             accountRoleRepository.save(accountRole);
             modelAndView.setViewName("accountVerified");
         }

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : AdminPage
-    Created on : Oct 14, 2020, 2:10:54 PM
-    Author     : Dell
---%>
+
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
@@ -82,7 +78,10 @@
                                 <a href="${pageContext.request.getContextPath()}/showCustomer">View All Customers</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.getContextPath()}/formUpload">Up load Images</a>
+                                <a href="${pageContext.request.getContextPath()}/addCategory">Add Category</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.getContextPath()}/addProducer">Add Producer</a>
                             </li>
                             
                         </ul>
@@ -105,7 +104,7 @@
                     <div class="input-group form">
 
                         <form:form action="${pageContext.request.getContextPath()}/searchCustomer"  method="get" modelAttribute="searchCustomer">    
-                            <input type="text" size="10000" class="form-control" name="searchCustomer" placeholder="Search for (Customer Name, Sex, Address )">
+                            <input type="text" size="10000" class="form-control" name="searchCustomer" placeholder="Search for (Customer Name, Gender, Email )">
                             <span class="input-group-btn">
                                 <!-- <button class="btn btn-primary" type="button">Search</button> -->
                                 <input class="btn btn-primary" type="submit" value="SEARCH">
@@ -117,6 +116,9 @@
                             <a href="${pageContext.request.getContextPath()}/addNewCustomer">ADD NEW CUSTOMER....</a>
                         </li>
                     </div>
+                        <c:if test="${messenger != null}">
+                                <div class="error"><i><h4 style="color:red;">${messenger}</h4></i></div>
+                                        </c:if>
                 </div>
             </div>
         </div>
@@ -136,13 +138,13 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Birth Date</th>
-                            <th>Sex</th>
+                            <th>Gender</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Address</th>
-                            <th>City</th>
+                            
                             <th>User Name</th>
-                            <th>Password</th>
+                            
                             <th>Enabled</th>
                             
                         </tr>
@@ -158,14 +160,13 @@
                                 <td>${customer.email}</td>
                                 <td>${customer.phone}</td>
                                 <td>${customer.customerAddress}</td>
-                                <td>${customer.customerCity}</td>
+                                
                                 <td>${customer.username}</td>
-                                <td>${customer.password}</td>
+                                
                                 <td>${customer.enabled}</td>
                                 
                                 <td> 
-                                    <a href="${pageContext.request.contextPath}/editCustomer/${customer.customerId}"
-                                       class="btn btn-info"><i class="material-icons font-16">Edit</i></a>
+                                    
                                     
                                     <a href="${pageContext.request.contextPath}/deleteCustomer/${customer.customerId}"
                                        class="btn btn-danger btn-delete" onclick="if (!(confirm('Are you sure you want to delete this customer?')))

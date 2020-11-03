@@ -26,7 +26,7 @@ public class Producer implements Serializable{
     @Column(name = "producerName")
     private String producerName;
     
-    @OneToMany(mappedBy = "producer", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "producer", fetch = FetchType.LAZY)
     private List<Product> products;
 
     public Producer() {

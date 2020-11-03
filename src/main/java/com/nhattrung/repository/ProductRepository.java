@@ -16,11 +16,10 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 
     List<Product> findByNote(String note);
 
-   
     @Query(value = "select * from product where productName like ?1 or price like ?2 or dateAdded like ?3 or note like ?4",
             nativeQuery = true)
-    List<Product> findListByProductNameLikeOrPriceLikeOrDateAddedOrNoteLike(String productName,String price, String dateAddedd, String note);
-    
+    List<Product> findListByProductNameLikeOrPriceLikeOrDateAddedOrNoteLike(String productName, String price, String dateAddedd, String note);
+
     Product findByProductId(int productId);
 
     @Query(value = "select * from  product where (CURDATE() - dateAdded)<=?1", nativeQuery = true)
@@ -28,11 +27,15 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 
     @Query(value = "select * from product where Category_categoryId =?1", nativeQuery = true)
     List<Product> findListProductByCategoryId(int category);
-    
+
     @Query(value = "select * from product where Producer_producerId=?1", nativeQuery = true)
     List<Product> findListProductByProducer(int producer);
-    
-    @Query(value = "select * from product where productName like %?1% or price like %?1%" , nativeQuery = true)
+
+    @Query(value = "select * from product where productName like %?1% or price like %?1%", nativeQuery = true)
     List<Product> search(String keyword);
-    
+
+    @Query(value = "select * from product where productId in (select Product_productId from orderdetails "
+            + "group by Product_productId "
+            + "order by sum(quantity) DESC)", nativeQuery = true)
+    List<Product> searchBestSell();
 }

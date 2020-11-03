@@ -25,6 +25,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,7 +57,6 @@ public class AdminController {
     ImageRepository imageRepository;
 
     @GetMapping(value = {"", "/showProduct", "/showProduct/{page}"})
-    
     public String listAllProducts(@PathVariable(required = false, name = "page") String page, HttpServletRequest request, HttpServletResponse response, Model model) {
 
         PagedListHolder<Product> productList;
@@ -101,11 +101,35 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/saveProduct", method = RequestMethod.POST)
-    
-    public String saveProduct(@ModelAttribute("product") Product product) {
-        productRepository.save(product);
+    @ResponseBody
+    public String saveProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file, @RequestParam("images[0].imageName") String imageName) {
+        
+        try {
+            byte[] bytes = file.getBytes();
+            String pathName = servletContext.getRealPath("/resources/images/item");
+            File dir = new File(pathName);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            productRepository.save(product);
+            Image image = new Image();
+            image.setProduct(product);
+            image.setImageName(imageName);
+            imageRepository.save(image);
 
-        return "redirect:/showProduct";
+            String fileSource = pathName + File.separator + file.getOriginalFilename();
+            File serverFile = new File(fileSource);
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+            stream.write(bytes);
+            stream.close();
+            
+        } catch (Exception e) {
+            
+            return "Error when uploading file " + e;
+        } finally{
+            return "redirect:/showProduct";
+        }
+            
     }
 
     @GetMapping(value = "/searchProduct")
@@ -115,7 +139,7 @@ public class AdminController {
         theModel.addAttribute("productList", productList);
 
         return "admin/resultSearchProduct";
-        //return "admin/admin";
+
     }
 
     @GetMapping("/editProduct/{productId}")
@@ -133,40 +157,64 @@ public class AdminController {
         return "admin/addNewProduct";
     }
 
-    @RequestMapping(value = "/formUpload", method = RequestMethod.GET)
-    public String showFormUpload(Model model) {
-        Image image = new Image();
-        model.addAttribute("image", image);
-        return "admin/upload";
-    }
-
-    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    @ResponseBody
-    String uploadFileHandker(@RequestParam("file") MultipartFile file, @ModelAttribute("image") Image image) {
-        try {
-            byte[] bytes = file.getBytes();
-            String pathName = servletContext.getRealPath("/resources/images/test");
-            File dir = new File(pathName);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            imageRepository.save(image);
-            String fileSource = pathName + File.separator + file.getOriginalFilename();
-            File serverFile = new File(fileSource);
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-            stream.write(bytes);
-            stream.close();
-            return "You upload sucessfully a file, at: " + fileSource;
-        } catch (Exception e) {
-            System.out.println(e);
-            return "Error when uploading file " + e;
-        }
-    }
-    
     @GetMapping("/deleteProduct/{productId}")
     public String deleteProduct(@PathVariable int productId) {
         //imageRepository.deleteByProductId(productId);
         productRepository.deleteById(productId);
         return "redirect:/showProduct";
+    }
+
+    @GetMapping("/addCategory")
+    public String showFormAddCategory(Model model) {
+        Category category = new Category();
+        model.addAttribute("category", category);
+        return "admin/addCategory";
+    }
+
+    @PostMapping("/saveCategory")
+    public String saveCategory(@ModelAttribute("category") Category category) {
+        categoryRepository.save(category);
+        return "redirect:/deleteCategory";
+    }
+
+    @GetMapping("/addProducer")
+    public String showFormAddProducer(Model model) {
+        Producer producer = new Producer();
+        model.addAttribute("producer", producer);
+        return "admin/addProducer";
+    }
+
+    @PostMapping("/saveProducer")
+    public String saveProducer(@ModelAttribute("producer") Producer producer) {
+        producerRepository.save(producer);
+        return "redirect:/deleteProducer";
+    }
+
+    @GetMapping("/deleteCategory")
+    public String showFormDeleteCategory(Model model) {
+        List<Category> categoryList = (List) categoryRepository.findAll();
+        model.addAttribute("categoryList", categoryList);
+        return "admin/deleteCategory";
+    }
+    
+    @GetMapping("/deleteCategory/{categoryId}")
+    public String deleteCategory(@PathVariable("categoryId") int categoryId) {
+        categoryRepository.deleteById(categoryId);
+        
+        return "redirect:/deleteCategory";
+    }
+    
+    @GetMapping("/deleteProducer")
+    public String showFormDeleteProducer(Model model) {
+        List<Producer> producerList = (List) producerRepository.findAll();
+        model.addAttribute("producerList", producerList);
+        return "admin/deleteProducer";
+    }
+    
+    @GetMapping("/deleteProducer/{producerId}")
+    public String deleteProducer(@PathVariable("producerId") int producerId) {
+        producerRepository.deleteById(producerId);
+        
+        return "redirect:/deleteProducer";
     }
 }

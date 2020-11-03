@@ -18,8 +18,8 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer>{
     Customer findByUsername(String username);
     Customer findByEmail(String email);
     
-    @Query(value = "select * from customer  where customerFirstName like ?1 or customerLastName like ?2 or sex like ?3 or customerAddress like ?4",
+    @Query(value = "select * from customer  where customerFirstName like ?1 or customerLastName like ?2 or sex like ?3 or email like ?4",
             nativeQuery = true)
-    List<Customer> findListByCustomerFirstNameLikeOrCustomerLastNameLikeOrSexLikeOrCustomerAddressLike(String customerFirstName,String customerLastName, String sex, String customerAddress);
+    List<Customer> findListByCustomerFirstNameLikeOrCustomerLastNameLikeOrSexLikeOrCustomerEmailLike(String customerFirstName,String customerLastName, String sex, String email);
     Customer findByCustomerId(int customerId);
 }

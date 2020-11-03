@@ -7,8 +7,8 @@ package com.nhattrung.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -17,11 +17,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 
@@ -66,16 +64,19 @@ public class Customer implements Serializable{
     @Column(name = "enabled")
     private boolean enabled;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<OrderList> orderLists;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<AccountRole> accountRoles;
+    
+    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
+    private ConfirmationToken confirmationToken;
 
     public Customer() {
     }
 
-    public Customer(int customerId, String customerFirstName, String customerLastName, LocalDate birthdate, String sex, String email, String phone, String customerAddress, String customerCity, String username, String password, boolean enabled, List<OrderList> orderLists, List<AccountRole> accountRoles) {
+    public Customer(int customerId, String customerFirstName, String customerLastName, LocalDate birthdate, String sex, String email, String phone, String customerAddress, String customerCity, String username, String password, boolean enabled, List<OrderList> orderLists, List<AccountRole> accountRoles, ConfirmationToken confirmationToken) {
         this.customerId = customerId;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
@@ -90,6 +91,7 @@ public class Customer implements Serializable{
         this.enabled = enabled;
         this.orderLists = orderLists;
         this.accountRoles = accountRoles;
+        this.confirmationToken = confirmationToken;
     }
 
     public int getCustomerId() {
@@ -204,6 +206,13 @@ public class Customer implements Serializable{
         this.accountRoles = accountRoles;
     }
 
-    
+    public ConfirmationToken getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(ConfirmationToken confirmationToken) {
+        this.confirmationToken = confirmationToken;
+    }
+
     
 }

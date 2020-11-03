@@ -82,9 +82,14 @@
                                 <a href="${pageContext.request.getContextPath()}/showCustomer">View All Customers</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.getContextPath()}/formUpload">Up load Images</a>
+                                <a href="${pageContext.request.getContextPath()}/addCategory">Add Category</a>
                             </li>
-                            
+                            <li>
+                                <a href="${pageContext.request.getContextPath()}/addProducer">Add Producer</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.getContextPath()}/showOrder">View All Orders</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -146,7 +151,7 @@
                             <tr>
                                 <td>${product.productId}</td>
                                 <td>${product.productName}</td>
-                                <td>${product.price}</td>
+                                <td>${product.formattedPrice}</td>
                                 <td>${product.note}</td>
                                 <td>${product.dateAdded}</td>
                                 <td>${product.category.categoryName}</td>

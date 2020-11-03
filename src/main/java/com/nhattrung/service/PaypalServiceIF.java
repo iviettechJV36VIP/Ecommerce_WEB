@@ -5,16 +5,17 @@
  */
 package com.nhattrung.service;
 
-import com.nhattrung.entity.Customer;
+import com.nhattrung.entity.Paypal;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
+/**
+ *
+ * @author Administrator
+ */
 @Service
-public interface CustomerServiceIF {
-    Customer getCustomerByUsername(String username);
-    
-    Customer getCustomerDetails();
-    
-    public List<Customer> getListCustomersSearch(String searchText);
-    public Customer getCustomerById(int customerId);
+public interface PaypalServiceIF {
+    public Paypal searchPaypal(int code);
+    public Paypal getUpdatePaypal(int newMoney, int id);
+    public List<Paypal> getAllPaypal();
 }

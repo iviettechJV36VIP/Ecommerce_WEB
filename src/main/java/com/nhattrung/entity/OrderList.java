@@ -41,11 +41,6 @@ public class OrderList implements Serializable{
     @Column(name = "amount")
     private int amount;
     
-    @Column(name = "address")
-    private String address;
-    
-    @Column(name = "numberPhone")
-    private String numberPhone;
     
     
     @OneToMany(mappedBy = "orderLists",fetch = FetchType.EAGER)
@@ -54,18 +49,20 @@ public class OrderList implements Serializable{
     @ManyToOne
     @JoinColumn(name = "Customer_customerId")
     private Customer customer;
+    
+    @OneToMany(mappedBy = "orderLists")
+    private List<Payment> payments;
 
     public OrderList() {
     }
 
-    public OrderList(int orderId, LocalDate orderDate, int amount, String address, String numberPhone, List<OrderDetails> orderDetailses, Customer customer) {
+    public OrderList(int orderId, LocalDate orderDate, int amount, List<OrderDetails> orderDetailses, Customer customer, List<Payment> payments) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.amount = amount;
-        this.address = address;
-        this.numberPhone = numberPhone;
         this.orderDetailses = orderDetailses;
         this.customer = customer;
+        this.payments = payments;
     }
 
     public int getOrderId() {
@@ -92,22 +89,6 @@ public class OrderList implements Serializable{
         this.amount = amount;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getNumberPhone() {
-        return numberPhone;
-    }
-
-    public void setNumberPhone(String numberPhone) {
-        this.numberPhone = numberPhone;
-    }
-
     public List<OrderDetails> getOrderDetailses() {
         return orderDetailses;
     }
@@ -123,5 +104,15 @@ public class OrderList implements Serializable{
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
+    
 
 }

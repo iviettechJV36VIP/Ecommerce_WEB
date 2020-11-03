@@ -1,9 +1,5 @@
-<%-- 
-    Document   : AdminPage
-    Created on : Oct 14, 2020, 2:10:54 PM
-    Author     : Dell
---%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -76,12 +72,17 @@
                           </a> -->
                         <ul class="ml-menu">
                             <li>
-                                <a href="${pageContext.request.getContextPath()}/showOrder">View All Orders</a>
+                                <a href="${pageContext.request.getContextPath()}/showProduct">View All Products</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.getContextPath()}/showPageReport">Report</a>
+                                <a href="${pageContext.request.getContextPath()}/showCustomer">View All Customers</a>
                             </li>
-
+                            <li>
+                                <a href="${pageContext.request.getContextPath()}/addCategory">Add Category</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.getContextPath()}/addProducer">Add Producer</a>
+                            </li>
                             
                         </ul>
                     </li>
@@ -97,7 +98,27 @@
 
     <div class="content-box-large">
 
-        
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="input-group form">
+
+                        <form:form action="${pageContext.request.getContextPath()}/searchCustomer"  method="get" modelAttribute="searchCustomer">    
+                            <input type="text" size="10000" class="form-control" name="searchCustomer" placeholder="Search for (Customer Name, Gender, Email )">
+                            <span class="input-group-btn">
+                                <!-- <button class="btn btn-primary" type="button">Search</button> -->
+                                <input class="btn btn-primary" type="submit" value="SEARCH">
+                            </span>
+                        </form:form>
+                    </div>
+                    <div class="input-group form">
+                        <li>
+                            <a href="${pageContext.request.getContextPath()}/addNewCustomer">ADD NEW CUSTOMER....</a>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="panel-body">
 
             <div class="table-responsive">
@@ -107,29 +128,48 @@
                         <tr>
                             <th></th>
                             <th></th>
-                            <th>ALL ORDERS</th>
+                            <th>ALL Customer</th>
                         </tr>
                         <tr>
-                            <th>Order Id</th>
-                            <th>Order Date</th>
-                            <th>Address</th>
+                            <th>Customer Id</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Birth Date</th>
+                            <th>Gender</th>
+                            <th>Email</th>
                             <th>Phone</th>
-                            <th>Full Name</th>
-                            <th>Total</th>
+                            <th>Address</th>
+                            
+                            <th>User Name</th>
+                            
+                            <th>Enabled</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="order" items="${orderList.pageList}">
+                        <c:forEach var="customer" items="${customerList.pageList}">
                             <tr>
-                                <td>${order.orderId}</td>
-                                <td>${order.orderDate}</td>
-                                <td>${order.customer.customerAddress}</td>
-                                <td>${order.customer.phone}</td>
-                                <td>${order.customer.customerFirstName} ${order.customer.customerLastName}</td>
+                                <td>${customer.customerId}</td>
+                                <td>${customer.customerFirstName}</td>
+                                <td>${customer.customerLastName}</td>
+                                <td>${customer.birthdate}</td>
+                                <td>${customer.sex}</td>
+                                <td>${customer.email}</td>
+                                <td>${customer.phone}</td>
+                                <td>${customer.customerAddress}</td>
                                 
-                                <td><fmt:formatNumber value="${order.amount}" type="currency"/></td>
-                                <td><a href="${pageContext.request.getContextPath()}/viewOrderDetails/${order.orderId}">View Order Details</a></td>
+                                <td>${customer.username}</td>
                                 
+                                <td>${customer.enabled}</td>
+                                
+                                <td> 
+                                    
+                                    
+                                    <a href="${pageContext.request.contextPath}/deleteCustomer/${customer.customerId}"
+                                       class="btn btn-danger btn-delete" onclick="if (!(confirm('Are you sure you want to delete this customer?')))
+                                                   return false"><i class="material-icons">Delete</i></a>
+                                             
+                                </td>
                             </tr>
 
                         </c:forEach>
@@ -138,33 +178,33 @@
                 </table>
                 
                 <c:choose>
-                    <c:when test="${orderList.firstPage}">
+                    <c:when test="${customerList.firstPage}">
                         <span>Prev</span>
                     </c:when>
                     <c:otherwise>
-                        <c:url value="/showOrder/prev" var="url" />                  
+                        <c:url value="/showCustomer/prev" var="url" />                  
                         <a href='<c:out value="${url}" />'>Prev</a>
                     </c:otherwise>
                 </c:choose>
-                <c:forEach begin="1" end="${orderList.pageCount}" step="1"  varStatus="tagStatus">
+                <c:forEach begin="1" end="${customerList.pageCount}" step="1"  varStatus="tagStatus">
                     <c:choose>
 
-                        <c:when test="${(orderList.page + 1) == tagStatus.index}">
+                        <c:when test="${(customerList.page + 1) == tagStatus.index}">
                             <span>${tagStatus.index}</span>
                         </c:when>
                         <c:otherwise>
-                            <c:url value="/showOrder/${tagStatus.index}" var="url" />                  
+                            <c:url value="/showCustomer/${tagStatus.index}" var="url" />                  
                             <a href='<c:out value="${url}" />'>${tagStatus.index}</a>
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
                 <c:choose>
 
-                    <c:when test="${orderList.lastPage}">
+                    <c:when test="${customerList.lastPage}">
                         <span>Next</span>
                     </c:when>
                     <c:otherwise>
-                        <c:url value="/orderList/next" var="url" />                  
+                        <c:url value="/showCustomer/next" var="url" />                  
                         <a href='<c:out value="${url}" />'>Next</a>
                     </c:otherwise>
                 </c:choose>

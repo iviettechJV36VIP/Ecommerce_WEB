@@ -5,8 +5,7 @@
  */
 package com.nhattrung.repository;
 
-import com.nhattrung.entity.OrderList;
-import java.util.List;
+import com.nhattrung.entity.Paypal;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -16,12 +15,10 @@ import org.springframework.stereotype.Repository;
  * @author Administrator
  */
 @Repository
-public interface OrderListRepository extends CrudRepository<OrderList, Integer>{
+public interface PaypalRepository extends CrudRepository<Paypal, Integer>{
+    @Query(value = "select * from paypal where paypalCode =?1", nativeQuery = true)
+    Paypal search(int code);
     
-    
-    @Query(value = " Select * from orderlist where orderDate like ?1 ",
-            nativeQuery = true)
-    List<OrderList> findOrderListByOrderDateLike(String orderDate);
-    
-    
+    @Query(value = "update paypal set paypalMoney = ?1 where paypalId = ?2", nativeQuery = true)
+    Paypal update(int newMoney, int id);
 }

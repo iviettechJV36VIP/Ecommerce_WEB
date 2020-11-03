@@ -28,6 +28,8 @@
           rel="stylesheet">
     <link href="<c:url value="/resources/css/responsive.css" />"
           rel="stylesheet">
+    <link href="<c:url value="/resources/css/dropzone.css" />"
+          rel="stylesheet">
     <body>
         <script src="<c:url value="/resources/js/jquery.js" />"></script>
         <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
@@ -58,122 +60,119 @@
     </script>
 
 
-
+    <h2 style="text-align: center;">ADD NEW PRODUCT</h2>
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="body">
-                    <form:form action="${pageContext.request.contextPath}/saveProduct" cssClass="form-horizontal" method="post" modelAttribute="product">
+                    <form:form action="${pageContext.request.contextPath}/saveProduct" cssClass="form-horizontal" method="post" modelAttribute="product" enctype="multipart/form-data">
 
                         <form:hidden path="productId" />
 
-                        <div class="row clearfix">
-                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="Product Name">Product Name:</label>
-                            </div>
-                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <form:textarea path="productName" rows="4" cssClass="form-control no-resize" ></form:textarea>
-                                        </div>
-                                    </div>
+                        <div class="form-group">
+
+                            <label for="Product Name" class="col-md-3 control-label">Product Name:</label>        
+                            <div class="col-md-4">
+                                <form:textarea path="productName" rows="4" cssClass="form-control no-resize" ></form:textarea>
                                 </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                    <label for="Price">Price:</label>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                        <form:input path="price" maxlength="100" cssClass="form-control" />
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
-                        <div class="row clearfix">
-                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="note">Note :</label>
-                            </div>
-                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
+                        <div class="form-group">
 
-                                        <form:input path="note" maxlength="100" cssClass="form-control" />
-                                    </div>
-                                </div>
+                            <label for="Price" class="col-md-3 control-label">Price:</label>        
+                            <div class="col-md-4">
+                                <form:input  path="price" maxlength="100" cssClass="form-control" />
                             </div>
+
                         </div>
-                        <div class="row clearfix">
-                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="dateAdded">Date Added :</label>
-                            </div>
-                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <form:input path="dateAdded" maxlength="100" cssClass="form-control" />
-                                    </div>
+                        <div class="form-group">
+
+                            <label for="Note" class="col-md-3 control-label">Note:</label>        
+                            <div class="col-md-4">
+                                <form:input path="note" maxlength="100" cssClass="form-control" />
                                 </div>
-                            </div>
+
                         </div>
-                        <div class="row clearfix">
-                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="categoryId">Category Name:</label>
-                            </div>
-                            <div class="col-lg-3 col-md-2 col-sm-2 col-xs-1">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <form:select path="category.categoryId" >
-                                            
-                                            <c:forEach var="category" items="${categoryList}">
-                                                <form:option   value="${category.categoryId}" label="${category.categoryName}"/>
-                                            </c:forEach> 
+                        <div class="form-group">
 
-                                        </form:select>
-                                    </div>
+                            <label for="Date Added" class="col-md-3 control-label">Date Added:</label>        
+                            <div class="col-md-4">
+                                <form:input path="dateAdded"  maxlength="100" cssClass="form-control" />
                                 </div>
-                            </div>
-                        </div>            
 
-                        <div class="row clearfix">
-                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                <label for="producerId">Producer Name:</label>
-                            </div>
-                            <div class="col-lg-3 col-md-2 col-sm-2 col-xs-1">
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        
-                                        <form:select path="producer.producerId">                                          
-                                            <c:forEach var="producer" items="${producerList}">
-                                                <form:option   value="${producer.producerId}" label="${producer.producerName}"/>
-                                            </c:forEach> 
-                                        </form:select>
-                                        
-                                    </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label for="Category Name" class="col-md-3 control-label">Category Name:</label>        
+                            <div class="col-md-2">
+                                <form:select path="category.categoryId" >
+
+                                        <c:forEach var="category" items="${categoryList}">
+                                            <form:option   value="${category.categoryId}" label="${category.categoryName}"/>
+                                        </c:forEach> 
+
+                                    </form:select>
                                 </div>
-                            </div>
-                        </div>           
-                        
-                                <br>
-                                <br>
-                                <div class="row clearfix">
-                                    <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
 
-                                        <button type="submit" class="btn btn-success m-t-15 w-90 waves-effect">Save</button>
-                                        <button type="reset" class="btn btn-warning m-t-15 w-90 waves-effect " 
-                                                onclick="if (!(confirm('Are you sure reset and input new Question?')))
-                                                            return false"> Reset</button>
+                        </div>
+                        <div class="form-group">
 
-                                    </div>
-                                </div> 
-                            </div>
+                            <label for="Producer Name" class="col-md-3 control-label">Producer Name:</label>        
+                            <div class="col-md-2">
+                                <form:select path="producer.producerId">                                          
+                                        <c:forEach var="producer" items="${producerList}">
+                                            <form:option   value="${producer.producerId}" label="${producer.producerName}"/>
+                                        </c:forEach> 
+                                    </form:select>
+                                </div>
+
+                        </div>
+                        <div class="form-group">
+
+                            <label for="images[0].imageName" class="col-md-3 control-label">Image Name:</label>        
+                            <div class="col-md-4">
+                                <form:input path="images[0].imageName" maxlength="100" cssClass="form-control" />
+                                </div>
+
+                        </div>
+                        <div class="form-group">
+
+                            <label for="file" class="col-md-3 control-label">Choose file:</label>      
+                            <div class="col-md-4">
+                                <input name="file" type="file" class="form-control">
+                                </div>
+
                         </div>
 
-                    </form:form>
+                    <br>
+                    <br>
+                    <div class="row clearfix">
+                        <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
 
+                            <button type="submit" class="btn btn-success m-t-15 w-90 waves-effect">Save</button>
+                            <button type="reset" class="btn btn-warning m-t-15 w-90 waves-effect " 
+                                    onclick="if (!(confirm('Are you sure reset and input new Question?')))
+                                                return false"> Reset</button>
+
+                        </div>
+                    </div> 
                 </div>
             </div>
-        </div>
+
+        </form:form>
+
     </div>
+</div>
+<script src="<c:url value="/resources/js/dropzone.js" />"></script>
+<script>
+                                        Dropzone.options.myAwesomeDropzone = {
+                                            paramName: "file",
+                                            maxFilesize: 3,
+                                            acceptedFiles: "image/*",
+                                            dictDefaultMessage: "Click hoac keo tha file muon upload",
+                                            dictInvalidFileType: "Chi cho upload hinh anh",
+                                            dictFileTooBig: "Dung luong file toi da 3MB"
+                                        }
+</script>
 </body>
 </html>

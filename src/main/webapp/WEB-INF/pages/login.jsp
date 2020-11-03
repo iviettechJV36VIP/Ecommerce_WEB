@@ -23,15 +23,13 @@
                             <c:if test="${not empty error}">
                                 <div class="error">${error}</div>
                             </c:if>
-                            <c:if test="${not empty msg}">
-                                <div class="msg">${msg}</div>
-                            </c:if>
+                            
 
                                 
                                     <form name="loginForm" action="<c:url value="/j_spring_security_check"/>" method="POST">
                                         <input type="text"  name="username" placeholder="Username" />
                                     <input type="password"  name="password" placeholder="Password" />
-                                 <a href="${pageContext.request.contextPath}/register">Tạo tài khoản mới</a>
+                                 <a href="${pageContext.request.contextPath}/register">Create new Account!</a>
                                 <button type="submit" class="btn btn-default">Login</button>
                                 
                                 
