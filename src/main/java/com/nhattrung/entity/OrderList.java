@@ -7,9 +7,10 @@
 package com.nhattrung.entity;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -21,10 +22,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name ="orderlist")
@@ -113,6 +111,10 @@ public class OrderList implements Serializable{
         this.payments = payments;
     }
 
-    
+    public String getFormattedAmount(){
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat c = NumberFormat.getCurrencyInstance(localeVN);
+        return c.format(amount);
+    }
 
 }

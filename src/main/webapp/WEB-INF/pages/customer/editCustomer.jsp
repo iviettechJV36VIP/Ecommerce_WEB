@@ -70,21 +70,21 @@
                         <div class="form-group">
 				<label for="customerFirstName" class="col-md-3 control-label">First
 				    Name</label>
-				<div class="col-md-9">
+				<div class="col-md-4">
 				    <form:input path="customerFirstName" cssClass="form-control" />
 				</div>
 			    </div>
 			    <div class="form-group">
 				<label for="customerLastName" class="col-md-3 control-label">Last
 				    Name</label>
-				<div class="col-md-9">
+				<div class="col-md-4">
 				    <form:input path="customerLastName" cssClass="form-control" />
 				</div>
 			    </div>
 
 			    <div class="form-group">
 				<label for="sex" class="col-md-3 control-label">Gender</label>
-				<div class="col-md-9">
+				<div class="col-md-2">
 				    <form:select cssClass="form-control" path="sex">
                                         <form:option value="male" label="male"/>
                                         <form:option value="female" label="female"/>
@@ -93,32 +93,37 @@
 			    </div>
                             <div class="form-group">
 				<label for="email" class="col-md-3 control-label">Email</label>
-				<div class="col-md-9">
+				<div class="col-md-4">
 				    <form:input path="email" cssClass="form-control" />
 				</div>
 			    </div>
                             <div class="form-group">
 				<label for="phone" class="col-md-3 control-label">Phone</label>
-				<div class="col-md-9">
+				<div class="col-md-4">
 				    <form:input path="phone" cssClass="form-control" />
 				</div>
 			    </div>
                             <div class="form-group">
 				<label for="customerAddress" class="col-md-3 control-label">Address</label>
-				<div class="col-md-9">
+				<div class="col-md-4">
 				    <form:input path="customerAddress" cssClass="form-control" />
 				</div>
 			    </div>
                             
                             <div class="form-group">
 				<label for="password" class="col-md-3 control-label">Password</label>
-				<div class="col-md-9">
+				<div class="col-md-4">
 				    <form:input path="password" cssClass="form-control" />
 				</div>
 			    </div>
                             
-                            
-                            <button type="submit" class="btn btn-success m-t-15 w-90 waves-effect">Save</button>   
+                            <div class="form-group">
+				<label for="" class="col-md-3 control-label"></label>
+				<div class="col-md-4">
+				    <button type="submit" class="btn btn-success m-t-15 w-90 waves-effect">Save</button>
+				</div>
+			    </div>
+                               
                     </form:form>
 
                 </div>

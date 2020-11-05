@@ -23,5 +23,7 @@ public interface OrderListRepository extends CrudRepository<OrderList, Integer>{
             nativeQuery = true)
     List<OrderList> findOrderListByOrderDateLike(String orderDate);
     
-    
+    @Query(value = " select * from orderlist where Customer_customerId = ?1 ",
+            nativeQuery = true)
+    List<OrderList> findOrderListByCustomerId(int customerId);
 }

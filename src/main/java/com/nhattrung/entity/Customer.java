@@ -70,7 +70,7 @@ public class Customer implements Serializable{
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<AccountRole> accountRoles;
     
-    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private ConfirmationToken confirmationToken;
 
     public Customer() {

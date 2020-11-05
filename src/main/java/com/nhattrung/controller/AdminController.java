@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/")
@@ -102,8 +103,8 @@ public class AdminController {
 
     @RequestMapping(value = "/saveProduct", method = RequestMethod.POST)
     @ResponseBody
-    public String saveProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file, @RequestParam("images[0].imageName") String imageName) {
-        
+    public ModelAndView saveProduct(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file, @RequestParam("images[0].imageName") String imageName) {
+        ModelAndView model = new ModelAndView();
         try {
             byte[] bytes = file.getBytes();
             String pathName = servletContext.getRealPath("/resources/images/item");
@@ -119,17 +120,18 @@ public class AdminController {
 
             String fileSource = pathName + File.separator + file.getOriginalFilename();
             File serverFile = new File(fileSource);
+            
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
             stream.write(bytes);
             stream.close();
-            
+             
         } catch (Exception e) {
+            System.out.println("File Not Found");
             
-            return "Error when uploading file " + e;
-        } finally{
-            return "redirect:/showProduct";
         }
-            
+            model.setViewName("redirect:/showProduct");
+        return model;
+        
     }
 
     @GetMapping(value = "/searchProduct")
@@ -196,25 +198,25 @@ public class AdminController {
         model.addAttribute("categoryList", categoryList);
         return "admin/deleteCategory";
     }
-    
+
     @GetMapping("/deleteCategory/{categoryId}")
     public String deleteCategory(@PathVariable("categoryId") int categoryId) {
         categoryRepository.deleteById(categoryId);
-        
+
         return "redirect:/deleteCategory";
     }
-    
+
     @GetMapping("/deleteProducer")
     public String showFormDeleteProducer(Model model) {
         List<Producer> producerList = (List) producerRepository.findAll();
         model.addAttribute("producerList", producerList);
         return "admin/deleteProducer";
     }
-    
+
     @GetMapping("/deleteProducer/{producerId}")
     public String deleteProducer(@PathVariable("producerId") int producerId) {
         producerRepository.deleteById(producerId);
-        
+
         return "redirect:/deleteProducer";
     }
 }

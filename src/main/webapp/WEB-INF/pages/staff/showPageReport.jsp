@@ -3,7 +3,7 @@
     Created on : Oct 14, 2020, 2:10:54 PM
     Author     : Dell
 --%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -140,7 +140,8 @@
                                 <td>${order.customer.customerAddress}</td>
                                 <td>${order.customer.phone}</td>
                                 <td>${order.customer.customerFirstName} ${order.customer.customerLastName}</td>
-                                <td>${order.amount}</td>
+                                <td>${order.formattedAmount}</td>
+                                
 
                             </tr>
 
@@ -151,7 +152,8 @@
                             <th></th>
                             <th></th>
                             <th>Total Money In Date:    </th>
-                            <th>${totalMoneyInDate}</th>
+                            
+                            <td><fmt:formatNumber value="${totalMoneyInDate}" type="currency"/></td>
                         </tr>
                     </tbody>
 

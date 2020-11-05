@@ -76,9 +76,20 @@
                           </a> -->
                         <ul class="ml-menu">
                             <li>
+                                <a href="${pageContext.request.getContextPath()}/showProduct">View All Products</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.getContextPath()}/showCustomer">View All Customers</a>
+                            </li>
+                            <li>
                                 <a href="${pageContext.request.getContextPath()}/addCategory">Add Category</a>
                             </li>
-
+                            <li>
+                                <a href="${pageContext.request.getContextPath()}/addProducer">Add Producer</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.getContextPath()}/showOrder">View All Orders</a>
+                            </li>
                         </ul>
                     </li>
 

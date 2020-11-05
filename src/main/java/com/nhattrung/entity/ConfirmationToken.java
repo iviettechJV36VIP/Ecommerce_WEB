@@ -33,7 +33,7 @@ public class ConfirmationToken implements Serializable {
     
 
     @OneToOne
-    @JoinColumn( name = "customerId")
+    @JoinColumn(name = "customerId")
     private Customer customer;
 
     public ConfirmationToken() {

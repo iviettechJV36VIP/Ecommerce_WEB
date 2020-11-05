@@ -15,6 +15,7 @@ import com.nhattrung.repository.CategoryRepository;
 import com.nhattrung.repository.ConfirmationTokenRepository;
 import com.nhattrung.repository.CustomerRepository;
 import com.nhattrung.repository.ImageRepository;
+import com.nhattrung.repository.OrderListRepository;
 import com.nhattrung.repository.ProducerRepository;
 import com.nhattrung.service.CustomerService;
 import com.nhattrung.service.Md5Service;
@@ -66,6 +67,9 @@ public class CustomerController {
 
     @Autowired
     ConfirmationTokenRepository confirmationTokenRepository;
+    
+    @Autowired
+    OrderListRepository orderListRepository;
 
     @GetMapping(value = {"", "/showCustomer", "/showCustomer/{page}"})
     public String listAllCustomers(@PathVariable(required = false, name = "page") String page, HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -138,18 +142,28 @@ public class CustomerController {
 
     
     @GetMapping("/deleteCustomer/{customerId}")
-    public String deleteCustomer(@PathVariable int customerId) {
-        Customer customer = customerRepository.findByCustomerId(customerId);
-        try {
+    public String deleteCustomer(@PathVariable int customerId, Model model) {
+        //Customer customer = customerRepository.findByCustomerId(customerId);
+        List<OrderList> orderLists = orderListRepository.findOrderListByCustomerId(customerId);
+        String messenger = null;
+        if(orderLists.isEmpty()){
+            customerRepository.deleteById(customerId);
+            return "redirect:/showCustomer";
+        } else {
+            messenger = "Cannot delete this customer because ordered";
+            model.addAttribute("messenger", messenger);
+            return "admin/viewAllCustomer";  
+        }
+        
+        /*try { 
             int tokenId = customer.getConfirmationToken().getTokenId();
-            //List<OrderList> orderLists = customer.getOrderLists();
+            
             confirmationTokenRepository.deleteById(tokenId);
             customerRepository.deleteById(customerId);
         } catch (Exception e) {
             customerRepository.deleteById(customerId);
-        }
-
-        return "redirect:/showCustomer";
+        }*/
+        
     }
     
     @GetMapping(value = "/profile")

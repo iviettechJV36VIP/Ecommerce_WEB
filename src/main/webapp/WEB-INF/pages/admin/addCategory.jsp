@@ -49,6 +49,7 @@
         <li><a>Wellcome, ${pageContext.request.userPrincipal.name}   |</a> 
         </li>
         <li><a href="javascript:formSubmit()"> Logout</a></li>
+        
         </c:if>
 
     <script>

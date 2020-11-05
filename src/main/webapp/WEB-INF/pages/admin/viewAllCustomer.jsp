@@ -24,16 +24,16 @@
           rel="stylesheet">
     <link href="<c:url value="/resources/css/responsive.css" />"
           rel="stylesheet">
-    
+
     <script src="<c:url value="/resources/js/jquery.js" />"></script>
-        <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-        <script src="<c:url value="/resources/js/jquery.scrollUp.min.js" />"></script>
-        <script src="<c:url value="/resources/js/price-range.js" />"></script>
-        <script src="<c:url value="/resources/js/jjquery.prettyPhoto.js" />"></script>
-        <script src="<c:url value="/resources/js/main.js" />"></script>
-    
+    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+    <script src="<c:url value="/resources/js/jquery.scrollUp.min.js" />"></script>
+    <script src="<c:url value="/resources/js/price-range.js" />"></script>
+    <script src="<c:url value="/resources/js/jjquery.prettyPhoto.js" />"></script>
+    <script src="<c:url value="/resources/js/main.js" />"></script>
+
     <body>
-        
+
 
         <form action="<c:url value='/j_spring_security_logout' />" method="post" id="logoutForm">
             <input type="hidden" name="${_csrf.parameterName}"
@@ -44,7 +44,7 @@
         </c:if>
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
-        
+
         <li><a>Wellcome, ${pageContext.request.userPrincipal.name}   |</a> 
         </li>
         <li><a href="javascript:formSubmit()"> Logout</a></li>
@@ -83,7 +83,9 @@
                             <li>
                                 <a href="${pageContext.request.getContextPath()}/addProducer">Add Producer</a>
                             </li>
-                            
+                            <li>
+                                <a href="${pageContext.request.getContextPath()}/showOrder">View All Orders</a>
+                            </li>
                         </ul>
                     </li>
 
@@ -116,16 +118,17 @@
                             <a href="${pageContext.request.getContextPath()}/addNewCustomer">ADD NEW CUSTOMER....</a>
                         </li>
                     </div>
-                        <c:if test="${messenger != null}">
-                                <div class="error"><i><h4 style="color:red;">${messenger}</h4></i></div>
-                                        </c:if>
+                    <c:if test="${messenger != null}">
+            <div class="error"><i><h4 style="color:red;">${messenger}</h4></i></div>
+                    </c:if>    
                 </div>
             </div>
         </div>
+        
         <div class="panel-body">
 
             <div class="table-responsive">
-                
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -142,11 +145,11 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Address</th>
-                            
+
                             <th>User Name</th>
-                            
+
                             <th>Enabled</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -160,26 +163,26 @@
                                 <td>${customer.email}</td>
                                 <td>${customer.phone}</td>
                                 <td>${customer.customerAddress}</td>
-                                
+
                                 <td>${customer.username}</td>
-                                
+
                                 <td>${customer.enabled}</td>
-                                
+
                                 <td> 
-                                    
-                                    
+
+
                                     <a href="${pageContext.request.contextPath}/deleteCustomer/${customer.customerId}"
                                        class="btn btn-danger btn-delete" onclick="if (!(confirm('Are you sure you want to delete this customer?')))
                                                    return false"><i class="material-icons">Delete</i></a>
-                                             
+
                                 </td>
                             </tr>
 
                         </c:forEach>
                     </tbody>
-                    
+
                 </table>
-                
+
                 <c:choose>
                     <c:when test="${customerList.firstPage}">
                         <span>Prev</span>

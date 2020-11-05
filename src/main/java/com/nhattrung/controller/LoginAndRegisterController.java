@@ -28,6 +28,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
+
 public class LoginAndRegisterController {
 
     @Autowired
@@ -121,6 +123,7 @@ public class LoginAndRegisterController {
     }
 
     @PostMapping(value = "/register")
+    @Transactional(rollbackFor = Exception.class)
     public ModelAndView saveCustomer(@ModelAttribute("customer") Customer customer, ModelAndView modelAndView) {
 
         Customer existingUser = customerRepository.findByEmail(customer.getEmail());
@@ -132,7 +135,7 @@ public class LoginAndRegisterController {
             customer.setPassword(md5Service.md5(password));
             customerRepository.save(customer);          
             ConfirmationToken confirmationToken = new ConfirmationToken(customer);
-
+            
             confirmationTokenRepository.save(confirmationToken);
 
             SimpleMailMessage mailMessage = new SimpleMailMessage();
